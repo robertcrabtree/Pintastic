@@ -199,7 +199,6 @@ public class Pin {
         )
     }
 
-#warning("Implement test case")
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
@@ -213,7 +212,6 @@ public class Pin {
         )
     }
 
-#warning("Implement test case")
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
@@ -476,6 +474,7 @@ public class Pin {
         switch relationship {
         case .discrete:
             assert(false, "The relionship should be .attached for relational constraints")
+            return self
         case .relational(let secondaryItem):
             return addConstraint(key, constraint: block(secondaryItem))
         }
