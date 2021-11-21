@@ -146,18 +146,36 @@ public class Pin {
     }
 
     /// Pin the horizontal centers of the primary item and the secondary item
+    /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func horizontalCenters() -> Pin {
+    public func horizontalCenters(multiplier: CGFloat = 1.0) -> Pin {
         addRelationalConstraint(.horizontalCenters) { other in
-            primaryItem.centerXAnchor.constraint(equalTo: other.centerXAnchor)
+            NSLayoutConstraint(
+                item: primaryItem,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: other,
+                attribute: .centerX,
+                multiplier: multiplier,
+                constant: 0.0
+            )
         }
     }
 
     /// Pin the vertical centers of the primary item and the secondary item
+    /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func verticalCenters() -> Pin {
+    public func verticalCenters(multiplier: CGFloat = 1.0) -> Pin {
         addRelationalConstraint(.verticalCenters) { other in
-            primaryItem.centerYAnchor.constraint(equalTo: other.centerYAnchor)
+            NSLayoutConstraint(
+                item: primaryItem,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: other,
+                attribute: .centerY,
+                multiplier: multiplier,
+                constant: 0.0
+            )
         }
     }
 
@@ -181,6 +199,7 @@ public class Pin {
         )
     }
 
+#warning("Implement test case")
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
@@ -194,6 +213,7 @@ public class Pin {
         )
     }
 
+#warning("Implement test case")
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
