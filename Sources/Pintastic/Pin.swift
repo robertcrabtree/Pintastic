@@ -281,32 +281,6 @@ public class Pin {
         }
     }
 
-    /// Request a constraint of the specified type
-    ///
-    /// This is useful if you need to customize the constraint
-    ///
-    /// - Parameters:
-    ///   - type: The type of constraint
-    ///   - handler: A closure that passes the constraint to the caller
-    /// - Returns: A reference to the `Pin`
-    public func constraint(
-        ofType type: Constraint,
-        handler: (NSLayoutConstraint?) -> Void
-    ) -> Pin {
-        constraint(withIdentifier: type.rawValue, handler: handler)
-    }
-
-    /// Request a constraint of the specified type
-    ///
-    /// This is useful if you need to modify or customize the constraint at a later time.
-    ///
-    /// - Parameters:
-    ///   - type: The type of constraint
-    /// - Returns: The requested constraint
-    public func constraint(ofType type: Constraint) -> NSLayoutConstraint? {
-        constraint(withIdentifier: type.rawValue)
-    }
-
     /// Add a custom constraint
     ///
     /// To help identify the constraint it's wise to set the `identifier` property on the constraint
@@ -337,6 +311,32 @@ public class Pin {
     /// - Returns: A reference to the `Pin`
     public func constrain(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
         constrain(withIdentifier: identifier, constraint: builder())
+    }
+
+    /// Request a constraint of the specified type
+    ///
+    /// This is useful if you need to customize the constraint
+    ///
+    /// - Parameters:
+    ///   - type: The type of constraint
+    ///   - handler: A closure that passes the constraint to the caller
+    /// - Returns: A reference to the `Pin`
+    public func constraint(
+        ofType type: Constraint,
+        handler: (NSLayoutConstraint?) -> Void
+    ) -> Pin {
+        constraint(withIdentifier: type.rawValue, handler: handler)
+    }
+
+    /// Request a constraint of the specified type
+    ///
+    /// This is useful if you need to modify or customize the constraint at a later time.
+    ///
+    /// - Parameters:
+    ///   - type: The type of constraint
+    /// - Returns: The requested constraint
+    public func constraint(ofType type: Constraint) -> NSLayoutConstraint? {
+        constraint(withIdentifier: type.rawValue)
     }
 
     /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
