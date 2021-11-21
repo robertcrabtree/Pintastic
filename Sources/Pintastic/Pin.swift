@@ -59,9 +59,6 @@ public class Pin {
 
     // MARK: API
 
-    /// The current `Pin` state
-    private(set) var state = State.inactive
-
     /// Initialize a `Pin` with the item(s) to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
     /// - Parameter type: `.discreet` if the item will not be pinned to another item. `.relational` if the item will be pinned to another
@@ -331,13 +328,11 @@ public class Pin {
     ///     .edges()
     ///     .activate()
     /// ```
+    ///
     /// - Returns: A reference to the `Pin`
     @discardableResult
     public func activate() -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
-
         NSLayoutConstraint.activate(constraints.values.map { $0 })
-        state = .active
         return self
     }
 
@@ -357,13 +352,10 @@ public class Pin {
         constraint(withIdentifier: identifier)?.isActive = true
     }
 
-    /// Deactivate all of the previously specified constraints
+    /// Deactivate all constraints
     ///
     public func deactivate() {
-        assert(state == .active, "The pin has already been activated")
-
         NSLayoutConstraint.deactivate(constraints.values.map { $0 })
-        state = .inactive
     }
 
     /// Deactivate the specified constraint

@@ -415,7 +415,6 @@ class Test_Pin: XCTestCase {
             })
             .activate()
 
-        XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, true)
         XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, true)
     }
@@ -436,7 +435,6 @@ class Test_Pin: XCTestCase {
 
         pin.activateConstraint(ofType: .leadingEdges)
         pin.activateConstraint(withIdentifier: "sibling1.height")
-        XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, true)
         XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, true)
     }
@@ -451,7 +449,6 @@ class Test_Pin: XCTestCase {
             .activate()
 
         pin.deactivate()
-        XCTAssertEqual(pin.state, .inactive)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, false)
         XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, false)
     }
@@ -467,7 +464,6 @@ class Test_Pin: XCTestCase {
 
         pin.deactivateConstraint(ofType: .leadingEdges)
         pin.deactivateConstraint(withIdentifier: "sibling1.height")
-        XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, false)
         XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, false)
     }
@@ -483,7 +479,6 @@ class Test_Pin: XCTestCase {
 
         let leading = pin.removeConstraint(ofType: .leadingEdges)
         let height = pin.removeConstraint(withIdentifier: "sibling1.height")
-        XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(leading?.isActive, true)
         XCTAssertEqual(height?.isActive, true)
         XCTAssertNil(pin.constraint(ofType: .leadingEdges))
