@@ -49,16 +49,16 @@ public extension Pin {
         case height = "pin.discrete.height"
 
         /// Discrete constraint with equal width and height
-        case sameWidthAndHeight = "pin.discrete.width.height"
+        case widthToHeight = "pin.discrete.width.height"
 
         /// Discrete constraint with equal height and width
-        case sameHeightAndWidth = "pin.discrete.height.width"
+        case heightToWidth = "pin.discrete.height.width"
 
         /// Relational constraint with equal widths
-        case equalWidths = "pin.relational.width.width"
+        case widths = "pin.relational.width.width"
 
         /// Relational constraint with equal heights
-        case equalHeights = "pin.relational.height.height"
+        case heights = "pin.relational.height.height"
 
         /// Relational constraint with leading edge of primary item constrained to horizontal center of second item
         case leadingEdgeToCenter = "pin.relational.leading.hcenter"

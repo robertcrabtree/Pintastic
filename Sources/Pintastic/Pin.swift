@@ -202,9 +202,9 @@ public class Pin {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func sameWidthAndHeight(multiplier: CGFloat = 1.0) -> Pin {
+    public func widthToHeight(multiplier: CGFloat = 1.0) -> Pin {
         addConstraint(
-            .sameWidthAndHeight,
+            .widthToHeight,
             constraint: primaryItem.widthAnchor.constraint(
                 equalTo: primaryItem.heightAnchor,
                 multiplier: multiplier
@@ -215,9 +215,9 @@ public class Pin {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func sameHeightAndWidth(multiplier: CGFloat = 1.0) -> Pin {
+    public func heightToWidth(multiplier: CGFloat = 1.0) -> Pin {
         addConstraint(
-            .sameHeightAndWidth,
+            .heightToWidth,
             constraint: primaryItem.heightAnchor.constraint(
                 equalTo: primaryItem.widthAnchor,
                 multiplier: multiplier
@@ -228,8 +228,8 @@ public class Pin {
     /// Constrain the primary item width to the width of the secondary item
     /// - Parameter multiplier: The width multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalWidths(multiplier: CGFloat = 1.0) -> Pin {
-        addRelationalConstraint(.equalWidths) { other in
+    public func widths(multiplier: CGFloat = 1.0) -> Pin {
+        addRelationalConstraint(.widths) { other in
             primaryItem.widthAnchor.constraint(equalTo: other.widthAnchor, multiplier: multiplier)
         }
     }
@@ -237,8 +237,8 @@ public class Pin {
     /// Constrain the primary item height to the width of the secondary item
     /// - Parameter multiplier: The height multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalHeights(multiplier: CGFloat = 1.0) -> Pin {
-        addRelationalConstraint(.equalHeights) { other in
+    public func heights(multiplier: CGFloat = 1.0) -> Pin {
+        addRelationalConstraint(.heights) { other in
             primaryItem.heightAnchor.constraint(equalTo: other.heightAnchor, multiplier: multiplier)
         }
     }
