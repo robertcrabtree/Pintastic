@@ -25,16 +25,16 @@ public extension Pin {
         case bottomEdges
 
         /// Relational constraint with bottom edge of primary item pinned to top edge of second item
-        case bottomAndTopEdges
+        case bottomToTopEdge
 
         /// Relational constraint with top edge of primary item pinned to bottom edge of second item
-        case topAndBottomEdges
+        case topToBottomEdge
 
         /// Relational constraint with leading edge of primary item pinned to trailing edge of second item
-        case leadingAndTrailingEdges
+        case leadingToTrailingEdge
 
         /// Relational constraint with trailing edge of primary item pinned to leading edge of second item
-        case trailingAndLeadingEdges
+        case trailingToLeadingEdge
 
         /// Relational constraint with horizontal centers pinned
         case horizontalCenters
@@ -55,15 +55,15 @@ public extension Pin {
         case equalHeights
 
         /// Relational constraint with leading edge of primary item constrained to horizontal center of second item
-        case leadingEdgeAndCenter
+        case leadingEdgeToCenter
 
         /// Relational constraint with trailing edge of primary item constrained to horizontal center of second item
-        case trailingEdgeAndCenter
+        case trailingEdgeToCenter
 
         /// Relational constraint with top edge of primary item constrained to vertical center of second item
-        case topEdgeAndCenter
+        case topEdgeToCenter
 
         /// Relational constraint with bottom edge of primary item constrained to vertical center of second item
-        case bottomEdgeAndCenter
+        case bottomEdgeToCenter
     }
 }

@@ -115,8 +115,8 @@ public class Pin {
     /// Pin the bottom of the primary item to the top of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func bottomAndTopEdges(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.bottomAndTopEdges) { other in
+    public func bottomToTopEdge(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.bottomToTopEdge) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.topAnchor, constant: constant)
         }
     }
@@ -124,8 +124,8 @@ public class Pin {
     /// Pin the top of the primary item to the bottom of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func topAndBottomEdges(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.topAndBottomEdges) { other in
+    public func topToBottomEdge(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.topToBottomEdge) { other in
             primaryItem.topAnchor.constraint(equalTo: other.bottomAnchor, constant: constant)
         }
     }
@@ -133,8 +133,8 @@ public class Pin {
     /// Pin the leading edge of the primary item to the trailing edge of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func leadingAndTrailingEdges(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.leadingAndTrailingEdges) { other in
+    public func leadingToTrailingEdge(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.leadingToTrailingEdge) { other in
             primaryItem.leadingAnchor.constraint(equalTo: other.trailingAnchor, constant: constant)
         }
     }
@@ -142,8 +142,8 @@ public class Pin {
     /// Pin the trailing edge of the primary item to the leading edge of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func trailingAndLeadingEdges(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.trailingAndLeadingEdges) { other in
+    public func trailingToLeadingEdge(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.trailingToLeadingEdge) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.leadingAnchor, constant: constant)
         }
     }
@@ -205,8 +205,8 @@ public class Pin {
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func leadingEdgeAndCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.leadingEdgeAndCenter) { other in
+    public func leadingEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.leadingEdgeToCenter) { other in
             primaryItem.leadingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -214,8 +214,8 @@ public class Pin {
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func trailingEdgeAndCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.trailingEdgeAndCenter) { other in
+    public func trailingEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.trailingEdgeToCenter) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -223,8 +223,8 @@ public class Pin {
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func topEdgeAndCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.topEdgeAndCenter) { other in
+    public func topEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.topEdgeToCenter) { other in
             primaryItem.topAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
@@ -232,8 +232,8 @@ public class Pin {
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func bottomEdgeAndCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.bottomEdgeAndCenter) { other in
+    public func bottomEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.bottomEdgeToCenter) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
