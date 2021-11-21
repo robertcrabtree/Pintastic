@@ -424,7 +424,6 @@ public class Pin {
     }
 
     private func addConstraint(_ identifier: String, constraint: NSLayoutConstraint) -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
         assert(constraints[identifier] == nil, "A constraint identifier \(identifier) already exists")
 
         constraint.identifier = identifier
