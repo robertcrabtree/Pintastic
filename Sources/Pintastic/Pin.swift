@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-/// A wrapper around autolayout
+/// Syntactic sugar for autolayout
 ///
 /// A pin can have two types of relationships:
 /// - `.discrete`: The item will not be pinned to another iteam (such as for width and height configurations)
@@ -58,9 +58,6 @@ import UIKit
 public class Pin {
 
     // MARK: API
-
-    /// The current `Pin` state
-    private(set) var state = State.inactive
 
     /// Initialize a `Pin` with the item(s) to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
@@ -149,18 +146,36 @@ public class Pin {
     }
 
     /// Pin the horizontal centers of the primary item and the secondary item
+    /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func horizontalCenters() -> Pin {
+    public func horizontalCenters(multiplier: CGFloat = 1.0) -> Pin {
         addRelationalConstraint(.horizontalCenters) { other in
-            primaryItem.centerXAnchor.constraint(equalTo: other.centerXAnchor)
+            NSLayoutConstraint(
+                item: primaryItem,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: other,
+                attribute: .centerX,
+                multiplier: multiplier,
+                constant: 0.0
+            )
         }
     }
 
     /// Pin the vertical centers of the primary item and the secondary item
+    /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func verticalCenters() -> Pin {
+    public func verticalCenters(multiplier: CGFloat = 1.0) -> Pin {
         addRelationalConstraint(.verticalCenters) { other in
-            primaryItem.centerYAnchor.constraint(equalTo: other.centerYAnchor)
+            NSLayoutConstraint(
+                item: primaryItem,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: other,
+                attribute: .centerY,
+                multiplier: multiplier,
+                constant: 0.0
+            )
         }
     }
 
@@ -184,11 +199,37 @@ public class Pin {
         )
     }
 
+    /// Constrain the primary item width to the primary item height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `Pin`
+    public func widthToHeight(multiplier: CGFloat = 1.0) -> Pin {
+        addConstraint(
+            .widthToHeight,
+            constraint: primaryItem.widthAnchor.constraint(
+                equalTo: primaryItem.heightAnchor,
+                multiplier: multiplier
+            )
+        )
+    }
+
+    /// Constrain the primary item width to the primary item height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `Pin`
+    public func heightToWidth(multiplier: CGFloat = 1.0) -> Pin {
+        addConstraint(
+            .heightToWidth,
+            constraint: primaryItem.heightAnchor.constraint(
+                equalTo: primaryItem.widthAnchor,
+                multiplier: multiplier
+            )
+        )
+    }
+
     /// Constrain the primary item width to the width of the secondary item
     /// - Parameter multiplier: The width multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalWidths(multiplier: CGFloat = 1.0) -> Pin {
-        addRelationalConstraint(.equalWidths) { other in
+    public func widths(multiplier: CGFloat = 1.0) -> Pin {
+        addRelationalConstraint(.widths) { other in
             primaryItem.widthAnchor.constraint(equalTo: other.widthAnchor, multiplier: multiplier)
         }
     }
@@ -196,8 +237,8 @@ public class Pin {
     /// Constrain the primary item height to the width of the secondary item
     /// - Parameter multiplier: The height multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalHeights(multiplier: CGFloat = 1.0) -> Pin {
-        addRelationalConstraint(.equalHeights) { other in
+    public func heights(multiplier: CGFloat = 1.0) -> Pin {
+        addRelationalConstraint(.heights) { other in
             primaryItem.heightAnchor.constraint(equalTo: other.heightAnchor, multiplier: multiplier)
         }
     }
@@ -238,6 +279,38 @@ public class Pin {
         }
     }
 
+    /// Add a custom constraint
+    ///
+    /// To help identify the constraint it's wise to set the `identifier` property on the constraint
+    ///
+    /// To retrieve the constraint, call `constraint(identifier:handler:)` or  `constraint(identifier:)`
+    ///
+    /// Constraint will be activated when you call `activate()`
+    ///
+    /// - Parameters:
+    ///   - identifier: An identifier for the constraint
+    ///   - constraint: The constraint you wish to add
+    /// - Returns: A reference to the `Pin`
+    public func custom(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
+        addConstraint(identifier, constraint: constraint)
+    }
+
+    /// Add a custom constraint
+    ///
+    /// To help identify the constraint it's wise to set the `identifier` property on the constraint
+    ///
+    /// To retrieve the constraint, call `constraint(withIdentifier:handler:)` or  `constraint(withIdentifier:)`
+    ///
+    /// Constraint will be activated when you call `activate()`
+    ///
+    /// - Parameters:
+    ///   - identifier: An identifier for the constraint
+    ///   - builder: A closure that makes and returns a custom constraint
+    /// - Returns: A reference to the `Pin`
+    public func custom(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
+        custom(withIdentifier: identifier, constraint: builder())
+    }
+
     /// Request a constraint of the specified type
     ///
     /// This is useful if you need to customize the constraint
@@ -264,39 +337,7 @@ public class Pin {
         constraint(withIdentifier: type.rawValue)
     }
 
-    /// Add a custom constraint
-    ///
-    /// To help identify the constraint it's wise to set the `identifier` property on the constraint
-    ///
-    /// To retrieve the constraint, call `constraint(identifier:handler:)` or  `constraint(identifier:)`
-    ///
-    /// Constraint will be activated when you call `activate()`
-    ///
-    /// - Parameters:
-    ///   - identifier: An identifier for the constraint
-    ///   - constraint: The constraint you wish to add
-    /// - Returns: A reference to the `Pin`
-    public func constrain(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
-        addConstraint(identifier, constraint: constraint)
-    }
-
-    /// Add a custom constraint
-    ///
-    /// To help identify the constraint it's wise to set the `identifier` property on the constraint
-    ///
-    /// To retrieve the constraint, call `constraint(withIdentifier:handler:)` or  `constraint(withIdentifier:)`
-    ///
-    /// Constraint will be activated when you call `activate()`
-    ///
-    /// - Parameters:
-    ///   - identifier: An identifier for the constraint
-    ///   - builder: A closure that makes and returns a custom constraint
-    /// - Returns: A reference to the `Pin`
-    public func constrain(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
-        constrain(withIdentifier: identifier, constraint: builder())
-    }
-
-    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
@@ -310,7 +351,7 @@ public class Pin {
         return self
     }
 
-    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
     ///
     /// This is useful if you need to modify or customize the constraint at a later time.
     ///
@@ -331,13 +372,11 @@ public class Pin {
     ///     .edges()
     ///     .activate()
     /// ```
+    ///
     /// - Returns: A reference to the `Pin`
     @discardableResult
     public func activate() -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
-
         NSLayoutConstraint.activate(constraints.values.map { $0 })
-        state = .active
         return self
     }
 
@@ -357,13 +396,10 @@ public class Pin {
         constraint(withIdentifier: identifier)?.isActive = true
     }
 
-    /// Deactivate all of the previously specified constraints
+    /// Deactivate all constraints
     ///
     public func deactivate() {
-        assert(state == .active, "The pin has already been activated")
-
         NSLayoutConstraint.deactivate(constraints.values.map { $0 })
-        state = .inactive
     }
 
     /// Deactivate the specified constraint
@@ -424,7 +460,6 @@ public class Pin {
     }
 
     private func addConstraint(_ identifier: String, constraint: NSLayoutConstraint) -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
         assert(constraints[identifier] == nil, "A constraint identifier \(identifier) already exists")
 
         constraint.identifier = identifier
@@ -439,6 +474,7 @@ public class Pin {
         switch relationship {
         case .discrete:
             assert(false, "The relionship should be .attached for relational constraints")
+            return self
         case .relational(let secondaryItem):
             return addConstraint(key, constraint: block(secondaryItem))
         }

@@ -13,57 +13,63 @@ public extension Pin {
     enum Constraint: String {
 
         /// Relational constraint with leading edges pinned
-        case leadingEdges = "pin.leading.leading"
+        case leadingEdges = "pin.relational.leading.leading"
 
         /// Relational constraint with trailing edges pinned
-        case trailingEdges = "pin.trailing.trailing"
+        case trailingEdges = "pin.relational.trailing.trailing"
 
         /// Relational constraint with top edges pinned
-        case topEdges = "pin.top.top"
+        case topEdges = "pin.relational.top.top"
 
         /// Relational constraint with bottom edges pinned
-        case bottomEdges = "pin.bottom.bottom"
+        case bottomEdges = "pin.relational.bottom.bottom"
 
         /// Relational constraint with bottom edge of primary item pinned to top edge of second item
-        case bottomToTopEdge = "pin.bottom.top"
+        case bottomToTopEdge = "pin.relational.bottom.top"
 
         /// Relational constraint with top edge of primary item pinned to bottom edge of second item
-        case topToBottomEdge = "pin.top.bottom"
+        case topToBottomEdge = "pin.relational.top.bottom"
 
         /// Relational constraint with leading edge of primary item pinned to trailing edge of second item
-        case leadingToTrailingEdge = "pin.leading.trailing"
+        case leadingToTrailingEdge = "pin.relational.leading.trailing"
 
         /// Relational constraint with trailing edge of primary item pinned to leading edge of second item
-        case trailingToLeadingEdge = "pin.trailing.leading"
+        case trailingToLeadingEdge = "pin.relational.trailing.leading"
 
         /// Relational constraint with horizontal centers pinned
-        case horizontalCenters = "pin.hcenter.hcenter"
+        case horizontalCenters = "pin.relational.hcenter.hcenter"
 
         /// Relational constraint with vertical centers pinned
-        case verticalCenters = "pin.vcenter.vcenter"
+        case verticalCenters = "pin.relational.vcenter.vcenter"
 
-        /// Discreet constraint with a specified width
-        case width = "pin.width"
+        /// Discrete constraint with a specified width
+        case width = "pin.discrete.width"
 
-        /// Discreet constraint with a specified height
-        case height = "pin.height"
+        /// Discrete constraint with a specified height
+        case height = "pin.discrete.height"
+
+        /// Discrete constraint with equal width and height
+        case widthToHeight = "pin.discrete.width.height"
+
+        /// Discrete constraint with equal height and width
+        case heightToWidth = "pin.discrete.height.width"
 
         /// Relational constraint with equal widths
-        case equalWidths = "pin.width.width"
+        case widths = "pin.relational.width.width"
 
         /// Relational constraint with equal heights
-        case equalHeights = "pin.height.height"
+        case heights = "pin.relational.height.height"
 
         /// Relational constraint with leading edge of primary item constrained to horizontal center of second item
-        case leadingEdgeToCenter = "pin.leading.hcenter"
+        case leadingEdgeToCenter = "pin.relational.leading.hcenter"
 
         /// Relational constraint with trailing edge of primary item constrained to horizontal center of second item
-        case trailingEdgeToCenter = "pin.trailing.hcenter"
+        case trailingEdgeToCenter = "pin.relational.trailing.hcenter"
 
         /// Relational constraint with top edge of primary item constrained to vertical center of second item
-        case topEdgeToCenter = "pin.top.vcenter"
+        case topEdgeToCenter = "pin.relational.top.vcenter"
 
         /// Relational constraint with bottom edge of primary item constrained to vertical center of second item
-        case bottomEdgeToCenter = "pin.bottom.vcenter"
+        case bottomEdgeToCenter = "pin.relational.bottom.vcenter"
     }
 }
