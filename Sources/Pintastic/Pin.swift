@@ -65,7 +65,7 @@ public class Pin {
     /// Initialize a `Pin` with the item(s) to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
     /// - Parameter type: `.discreet` if the item will not be pinned to another item. `.relational` if the item will be pinned to another
-    public init(item: Pinnable, relationship: Relationship = .discrete) {
+    public init(item: Pinnable, relationship: Relationship) {
         self.primaryItem = item
         self.relationship = relationship
     }
@@ -320,6 +320,8 @@ public class Pin {
     }
 
     /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
+    ///
+    /// This is useful if you need to modify or customize the constraint at a later time.
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
