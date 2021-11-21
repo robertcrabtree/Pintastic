@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-/// A wrapper around autolayout
+/// Syntactic sugar for autolayout
 ///
 /// A pin can have two types of relationships:
 /// - `.discrete`: The item will not be pinned to another iteam (such as for width and height configurations)
@@ -178,6 +178,32 @@ public class Pin {
         addConstraint(
             .height,
             constraint: primaryItem.heightAnchor.constraint(equalToConstant: constant)
+        )
+    }
+
+    /// Constrain the primary item width to the primary item height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `Pin`
+    public func sameWidthAndHeight(multiplier: CGFloat = 1.0) -> Pin {
+        addConstraint(
+            .sameWidthAndHeight,
+            constraint: primaryItem.widthAnchor.constraint(
+                equalTo: primaryItem.heightAnchor,
+                multiplier: multiplier
+            )
+        )
+    }
+
+    /// Constrain the primary item width to the primary item height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `Pin`
+    public func sameHeightAndWidth(multiplier: CGFloat = 1.0) -> Pin {
+        addConstraint(
+            .sameHeightAndWidth,
+            constraint: primaryItem.heightAnchor.constraint(
+                equalTo: primaryItem.widthAnchor,
+                multiplier: multiplier
+            )
         )
     }
 
