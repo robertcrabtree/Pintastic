@@ -409,11 +409,11 @@ class Test_Pin: XCTestCase {
     func testCustomConstraint() throws {
         let pin = sibling1
             .pin
-            .constrain(
+            .custom(
                 withIdentifier: "sibling1.width",
                 constraint: .width(forPinnableItem: sibling1)
             )
-            .constrain(
+            .custom(
                 withIdentifier: "sibling1.height",
                 builder: {
                     .height(forPinnableItem: sibling1)
@@ -444,7 +444,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -457,7 +457,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -477,7 +477,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -491,7 +491,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -506,7 +506,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -523,7 +523,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .constrain(withIdentifier: "sibling1.height", builder: {
+            .custom(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()

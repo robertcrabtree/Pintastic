@@ -291,7 +291,7 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
     /// - Returns: A reference to the `Pin`
-    public func constrain(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
+    public func custom(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
         addConstraint(identifier, constraint: constraint)
     }
 
@@ -307,8 +307,8 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
     /// - Returns: A reference to the `Pin`
-    public func constrain(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
-        constrain(withIdentifier: identifier, constraint: builder())
+    public func custom(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
+        custom(withIdentifier: identifier, constraint: builder())
     }
 
     /// Request a constraint of the specified type
@@ -337,7 +337,7 @@ public class Pin {
         constraint(withIdentifier: type.rawValue)
     }
 
-    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
@@ -351,7 +351,7 @@ public class Pin {
         return self
     }
 
-    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
     ///
     /// This is useful if you need to modify or customize the constraint at a later time.
     ///
