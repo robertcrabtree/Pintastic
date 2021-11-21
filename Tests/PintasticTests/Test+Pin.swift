@@ -375,23 +375,23 @@ class Test_Pin: XCTestCase {
     func testCustomConstraint() throws {
         let pin = sibling1
             .pin
-            .custom(
-                identifier: "sibling1.width",
+            .constrain(
+                withIdentifier: "sibling1.width",
                 constraint: .width(forPinnableItem: sibling1)
             )
-            .custom(
-                identifier: "sibling1.height",
+            .constrain(
+                withIdentifier: "sibling1.height",
                 builder: {
                     .height(forPinnableItem: sibling1)
                 }
             )
             .activate()
 
-        guard let width = pin.customConstraint(withIdentifier: "sibling1.width") else {
+        guard let width = pin.constraint(withIdentifier: "sibling1.width") else {
             return XCTFail()
         }
 
-        guard let height = pin.customConstraint(withIdentifier: "sibling1.height") else {
+        guard let height = pin.constraint(withIdentifier: "sibling1.height") else {
             return XCTFail()
         }
 
@@ -410,42 +410,42 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .custom(identifier: "sibling1.height", builder: {
+            .constrain(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
 
         XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, true)
-        XCTAssertEqual(pin.customConstraint(withIdentifier: "sibling1.height")?.isActive, true)
+        XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, true)
     }
 
     func testActivateConstraint() throws {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .custom(identifier: "sibling1.height", builder: {
+            .constrain(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
 
         pin.deactivateConstraint(ofType: .leadingEdges)
-        pin.deactivateCustomConstraint(withIdentifier: "sibling1.height")
+        pin.deactivateConstraint(withIdentifier: "sibling1.height")
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, false)
-        XCTAssertEqual(pin.customConstraint(withIdentifier: "sibling1.height")?.isActive, false)
+        XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, false)
 
         pin.activateConstraint(ofType: .leadingEdges)
-        pin.activateCustomConstraint(withIdentifier: "sibling1.height")
+        pin.activateConstraint(withIdentifier: "sibling1.height")
         XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, true)
-        XCTAssertEqual(pin.customConstraint(withIdentifier: "sibling1.height")?.isActive, true)
+        XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, true)
     }
 
     func testDeactivate() throws {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .custom(identifier: "sibling1.height", builder: {
+            .constrain(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -453,41 +453,59 @@ class Test_Pin: XCTestCase {
         pin.deactivate()
         XCTAssertEqual(pin.state, .inactive)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, false)
-        XCTAssertEqual(pin.customConstraint(withIdentifier: "sibling1.height")?.isActive, false)
+        XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, false)
     }
 
     func testDeactivateConstraint() throws {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .custom(identifier: "sibling1.height", builder: {
+            .constrain(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
 
         pin.deactivateConstraint(ofType: .leadingEdges)
-        pin.deactivateCustomConstraint(withIdentifier: "sibling1.height")
+        pin.deactivateConstraint(withIdentifier: "sibling1.height")
         XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(pin.constraint(ofType: .leadingEdges)?.isActive, false)
-        XCTAssertEqual(pin.customConstraint(withIdentifier: "sibling1.height")?.isActive, false)
+        XCTAssertEqual(pin.constraint(withIdentifier: "sibling1.height")?.isActive, false)
     }
 
     func testRemoveConstraint() throws {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .custom(identifier: "sibling1.height", builder: {
+            .constrain(withIdentifier: "sibling1.height", builder: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
 
         let leading = pin.removeConstraint(ofType: .leadingEdges)
-        let height = pin.removeCustomConstraint(withIdentifier: "sibling1.height")
+        let height = pin.removeConstraint(withIdentifier: "sibling1.height")
         XCTAssertEqual(pin.state, .active)
         XCTAssertEqual(leading?.isActive, true)
         XCTAssertEqual(height?.isActive, true)
         XCTAssertNil(pin.constraint(ofType: .leadingEdges))
-        XCTAssertNil(pin.customConstraint(withIdentifier: "sibling1.height"))
+        XCTAssertNil(pin.constraint(withIdentifier: "sibling1.height"))
+    }
+
+    func testIdentifiers() throws {
+        let pin = sibling1
+            .pin(to: parent.safeAreaLayoutGuide)
+            .leadingEdges()
+            .constrain(withIdentifier: "sibling1.height", builder: {
+                .height(forPinnableItem: sibling1)
+            })
+            .activate()
+
+        let leadingByType = pin.constraint(ofType: .leadingEdges)
+        let leadingByIdentifier = pin.constraint(withIdentifier: Pin.Constraint.leadingEdges.rawValue)
+        let heightByIdentifier = pin.constraint(withIdentifier: "sibling1.height")
+
+        XCTAssertEqual(leadingByType?.identifier, Pin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(leadingByIdentifier?.identifier, Pin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(heightByIdentifier?.identifier, "sibling1.height")
     }
 }
 

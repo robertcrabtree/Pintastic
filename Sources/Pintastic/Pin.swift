@@ -250,8 +250,7 @@ public class Pin {
         ofType type: Constraint,
         handler: (NSLayoutConstraint?) -> Void
     ) -> Pin {
-        handler(self.constraint(ofType: type))
-        return self
+        constraint(withIdentifier: type.rawValue, handler: handler)
     }
 
     /// Request a constraint of the specified type
@@ -262,14 +261,14 @@ public class Pin {
     ///   - type: The type of constraint
     /// - Returns: The requested constraint
     public func constraint(ofType type: Constraint) -> NSLayoutConstraint? {
-        constraints[type]
+        constraint(withIdentifier: type.rawValue)
     }
 
     /// Add a custom constraint
     ///
     /// To help identify the constraint it's wise to set the `identifier` property on the constraint
     ///
-    /// To retrieve the constraint, call `customConstraint(identifier:handler:)` or  `customConstraint(identifier:)`
+    /// To retrieve the constraint, call `constraint(identifier:handler:)` or  `constraint(identifier:)`
     ///
     /// Constraint will be activated when you call `activate()`
     ///
@@ -277,23 +276,15 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
     /// - Returns: A reference to the `Pin`
-    public func custom(identifier: String, constraint: NSLayoutConstraint) -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
-        assert(
-            customConstraint(withIdentifier: identifier) == nil,
-            "A constraint with identifier \(identifier) already exists"
-        )
-
-        constraint.identifier = identifier
-        customConstraints.append(constraint)
-        return self
+    public func constrain(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
+        addConstraint(identifier, constraint: constraint)
     }
 
     /// Add a custom constraint
     ///
     /// To help identify the constraint it's wise to set the `identifier` property on the constraint
     ///
-    /// To retrieve the constraint, call `customConstraint(withIdentifier:handler:)` or  `customConstraint(withIdentifier:)`
+    /// To retrieve the constraint, call `constraint(withIdentifier:handler:)` or  `constraint(withIdentifier:)`
     ///
     /// Constraint will be activated when you call `activate()`
     ///
@@ -301,33 +292,33 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
     /// - Returns: A reference to the `Pin`
-    public func custom(identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
-        custom(identifier: identifier, constraint: builder())
+    public func constrain(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
+        constrain(withIdentifier: identifier, constraint: builder())
     }
 
-    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
     ///   - handler: A closure that passes the constraint to the caller
     /// - Returns: A reference to the `Pin`
-    public func customConstraint(
+    public func constraint(
         withIdentifier identifier: String,
         handler: (NSLayoutConstraint?) -> Void
     ) -> Pin {
-        handler(customConstraint(withIdentifier: identifier))
+        handler(constraint(withIdentifier: identifier))
         return self
     }
 
-    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `constrain(identifier:constraint:)` method
     ///
     /// This is useful if you need to modify or customize the constraint at a later time.
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
     /// - Returns: The requested constraint
-    public func customConstraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
-        customConstraints.first(where: { $0.identifier == identifier })
+    public func constraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
+        constraints[identifier]
     }
 
     /// Activates all of the previously specified constraints
@@ -345,7 +336,7 @@ public class Pin {
     public func activate() -> Pin {
         assert(state == .inactive, "The pin has already been activated")
 
-        NSLayoutConstraint.activate(constraints.values.map { $0 } + customConstraints)
+        NSLayoutConstraint.activate(constraints.values.map { $0 })
         state = .active
         return self
     }
@@ -358,13 +349,12 @@ public class Pin {
         self.constraint(ofType: type)?.isActive = true
     }
 
-
     /// Activate the specified constraint
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
-    public func activateCustomConstraint(withIdentifier identifier: String) {
-        customConstraint(withIdentifier: identifier)?.isActive = true
+    public func activateConstraint(withIdentifier identifier: String) {
+        constraint(withIdentifier: identifier)?.isActive = true
     }
 
     /// Deactivate all of the previously specified constraints
@@ -372,7 +362,7 @@ public class Pin {
     public func deactivate() {
         assert(state == .active, "The pin has already been activated")
 
-        NSLayoutConstraint.deactivate(constraints.values.map { $0 } + customConstraints)
+        NSLayoutConstraint.deactivate(constraints.values.map { $0 })
         state = .inactive
     }
 
@@ -392,8 +382,8 @@ public class Pin {
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
-    public func deactivateCustomConstraint(withIdentifier identifier: String) {
-        customConstraint(withIdentifier: identifier)?.isActive = false
+    public func deactivateConstraint(withIdentifier identifier: String) {
+        constraint(withIdentifier: identifier)?.isActive = false
     }
 
     /// Remove the specified constraint
@@ -405,7 +395,7 @@ public class Pin {
     /// - Returns: The requested constraint
     @discardableResult
     public func removeConstraint(ofType type: Constraint) -> NSLayoutConstraint? {
-        constraints.removeValue(forKey: type)
+        removeConstraint(withIdentifier: type.rawValue)
     }
 
     /// Remove the specified constraint
@@ -416,12 +406,8 @@ public class Pin {
     ///   - identifier: The constraint identifier
     /// - Returns: The requested constraint
     @discardableResult
-    public func removeCustomConstraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
-        guard let constraint = customConstraint(withIdentifier: identifier) else {
-            return nil
-        }
-        customConstraints.removeAll(where: { $0 === constraint })
-        return constraint
+    public func removeConstraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
+        constraints.removeValue(forKey: identifier)
     }
 
     // MARK: Private vars and constants
@@ -429,16 +415,20 @@ public class Pin {
     private let primaryItem: Pinnable
     private var relationship: Relationship
 
-    private var constraints: [Constraint: NSLayoutConstraint] = [:]
-    private var customConstraints: [NSLayoutConstraint] = []
+    private var constraints: [String: NSLayoutConstraint] = [:]
 
     // MARK: Private methods
 
-    private func addConstraint(_ key: Constraint, constraint: NSLayoutConstraint) -> Pin {
-        assert(state == .inactive, "The pin has already been activated")
-        assert(constraints[key] == nil, "A constraint of type \(key) already exists")
+    private func addConstraint(_ type: Constraint, constraint: NSLayoutConstraint) -> Pin {
+        addConstraint(type.rawValue, constraint: constraint)
+    }
 
-        constraints[key] = constraint
+    private func addConstraint(_ identifier: String, constraint: NSLayoutConstraint) -> Pin {
+        assert(state == .inactive, "The pin has already been activated")
+        assert(constraints[identifier] == nil, "A constraint identifier \(identifier) already exists")
+
+        constraint.identifier = identifier
+        constraints[identifier] = constraint
         return self
     }
 
