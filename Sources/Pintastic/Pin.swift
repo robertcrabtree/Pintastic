@@ -182,7 +182,7 @@ public class Pin {
     /// Constrain the width of the primary item to the the specified constant
     /// - Parameter constant: The desired width
     /// - Returns: A reference to the `Pin`
-    public func width(to constant: CGFloat) -> Pin {
+    public func width(constant: CGFloat) -> Pin {
         addConstraint(
             .width,
             constraint: primaryItem.widthAnchor.constraint(equalToConstant: constant)
@@ -192,7 +192,7 @@ public class Pin {
     /// Constrain the height of the primary item to the the specified constant
     /// - Parameter constant: The desired height
     /// - Returns: A reference to the `Pin`
-    public func height(to constant: CGFloat) -> Pin {
+    public func height(constant: CGFloat) -> Pin {
         addConstraint(
             .height,
             constraint: primaryItem.heightAnchor.constraint(equalToConstant: constant)
