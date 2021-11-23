@@ -32,16 +32,16 @@ public protocol Pinnable {
 
 public extension Pinnable {
 
-    /// Use the `pin` property to apply constraints that aren't in relationship with another item.
+    /// Use the `pin()` method to apply constraints that aren't in relationship with another item.
     ///
     /// ```
     /// view
-    ///     .pin
+    ///     .pin()
     ///     .width(constant: 100)
     ///     .height(constant: 100)
     ///     .activate()
     /// ```
-    var pin: Pin {
+    func pin() -> Pin {
         Pin(item: self, relationship: .discrete)
     }
 

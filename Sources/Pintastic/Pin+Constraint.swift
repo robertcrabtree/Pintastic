@@ -25,16 +25,16 @@ public extension Pin {
         case bottomEdges = "pin.relational.bottom.bottom"
 
         /// Relational constraint with bottom edge of primary item pinned to top edge of second item
-        case bottomToTopEdge = "pin.relational.bottom.top"
+        case above = "pin.relational.bottom.top"
 
         /// Relational constraint with top edge of primary item pinned to bottom edge of second item
-        case topToBottomEdge = "pin.relational.top.bottom"
+        case below = "pin.relational.top.bottom"
 
         /// Relational constraint with leading edge of primary item pinned to trailing edge of second item
-        case leadingToTrailingEdge = "pin.relational.leading.trailing"
+        case after = "pin.relational.leading.trailing"
 
         /// Relational constraint with trailing edge of primary item pinned to leading edge of second item
-        case trailingToLeadingEdge = "pin.relational.trailing.leading"
+        case before = "pin.relational.trailing.leading"
 
         /// Relational constraint with horizontal centers pinned
         case horizontalCenters = "pin.relational.hcenter.hcenter"
@@ -61,15 +61,15 @@ public extension Pin {
         case heights = "pin.relational.height.height"
 
         /// Relational constraint with leading edge of primary item constrained to horizontal center of second item
-        case leadingEdgeToCenter = "pin.relational.leading.hcenter"
+        case leadingEdgeToHorizontalCenter = "pin.relational.leading.hcenter"
 
         /// Relational constraint with trailing edge of primary item constrained to horizontal center of second item
-        case trailingEdgeToCenter = "pin.relational.trailing.hcenter"
+        case trailingEdgeToHorizontalCenter = "pin.relational.trailing.hcenter"
 
         /// Relational constraint with top edge of primary item constrained to vertical center of second item
-        case topEdgeToCenter = "pin.relational.top.vcenter"
+        case topEdgeToVerticalCenter = "pin.relational.top.vcenter"
 
         /// Relational constraint with bottom edge of primary item constrained to vertical center of second item
-        case bottomEdgeToCenter = "pin.relational.bottom.vcenter"
+        case bottomEdgeToVerticalCenter = "pin.relational.bottom.vcenter"
     }
 }

@@ -26,7 +26,7 @@ import UIKit
 ///
 /// ```
 /// view
-///     .pin
+///     .pin()
 ///     .width(constant: 100.0)
 ///     .height(constant: 100.0)
 ///     .activate()
@@ -112,8 +112,8 @@ public class Pin {
     /// Pin the bottom of the primary item to the top of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func bottomToTopEdge(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.bottomToTopEdge) { other in
+    public func above(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.above) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.topAnchor, constant: constant)
         }
     }
@@ -121,27 +121,27 @@ public class Pin {
     /// Pin the top of the primary item to the bottom of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func topToBottomEdge(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.topToBottomEdge) { other in
+    public func below(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.below) { other in
             primaryItem.topAnchor.constraint(equalTo: other.bottomAnchor, constant: constant)
-        }
-    }
-
-    /// Pin the leading edge of the primary item to the trailing edge of the secondary item
-    /// - Parameter constant: A positive value will create space betwen the primary and secondary items
-    /// - Returns: A reference to the `Pin`
-    public func leadingToTrailingEdge(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.leadingToTrailingEdge) { other in
-            primaryItem.leadingAnchor.constraint(equalTo: other.trailingAnchor, constant: constant)
         }
     }
 
     /// Pin the trailing edge of the primary item to the leading edge of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func trailingToLeadingEdge(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.trailingToLeadingEdge) { other in
+    public func before(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.before) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.leadingAnchor, constant: constant)
+        }
+    }
+
+    /// Pin the leading edge of the primary item to the trailing edge of the secondary item
+    /// - Parameter constant: A positive value will create space betwen the primary and secondary items
+    /// - Returns: A reference to the `Pin`
+    public func after(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.after) { other in
+            primaryItem.leadingAnchor.constraint(equalTo: other.trailingAnchor, constant: constant)
         }
     }
 
@@ -252,8 +252,8 @@ public class Pin {
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func leadingEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.leadingEdgeToCenter) { other in
+    public func leadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.leadingEdgeToHorizontalCenter) { other in
             primaryItem.leadingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -261,8 +261,8 @@ public class Pin {
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func trailingEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.trailingEdgeToCenter) { other in
+    public func trailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.trailingEdgeToHorizontalCenter) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -270,8 +270,8 @@ public class Pin {
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func topEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.topEdgeToCenter) { other in
+    public func topEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.topEdgeToVerticalCenter) { other in
             primaryItem.topAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
@@ -279,8 +279,8 @@ public class Pin {
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func bottomEdgeToCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.bottomEdgeToCenter) { other in
+    public func bottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.bottomEdgeToVerticalCenter) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
@@ -297,7 +297,7 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
     /// - Returns: A reference to the `Pin`
-    public func custom(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
+    public func using(constraintIdentifier identifier: String, constraint: NSLayoutConstraint) -> Pin {
         addConstraint(identifier, constraint: constraint)
     }
 
@@ -313,8 +313,8 @@ public class Pin {
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
     /// - Returns: A reference to the `Pin`
-    public func custom(withIdentifier identifier: String, builder: () -> NSLayoutConstraint) -> Pin {
-        custom(withIdentifier: identifier, constraint: builder())
+    public func using(constraintIdentifier identifier: String, constraint: () -> NSLayoutConstraint) -> Pin {
+        using(constraintIdentifier: identifier, constraint: constraint())
     }
 
     /// Request a constraint of the specified type
@@ -343,7 +343,7 @@ public class Pin {
         constraint(withIdentifier: type.rawValue)
     }
 
-    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `using(constraintIdentifier:constraint:)` method
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
@@ -357,7 +357,7 @@ public class Pin {
         return self
     }
 
-    /// Request a constraint with the specified `identifier` added via the `custom(identifier:constraint:)` method
+    /// Request a constraint with the specified `identifier` added via the `using(constraintIdentifier:constraint:)` method
     ///
     /// This is useful if you need to modify or customize the constraint at a later time.
     ///
