@@ -479,7 +479,7 @@ public class Pin {
     ) -> Pin {
         switch relationship {
         case .discrete:
-            assert(false, "The relionship should be .attached for relational constraints")
+            assert(false, "The relationship should be .attached for relational constraints")
             return self
         case .relational(let secondaryItem):
             return addConstraint(key, constraint: block(secondaryItem))
