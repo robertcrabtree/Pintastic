@@ -145,6 +145,12 @@ public class Pin {
         }
     }
 
+    /// Pin the horizontal and vertical centers of the primary to the secondary item
+    /// - Returns: A reference to the `Pin`
+    public func centers() -> Pin {
+        horizontalCenters().verticalCenters()
+    }
+
     /// Pin the horizontal centers of the primary item and the secondary item
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`

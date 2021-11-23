@@ -171,6 +171,25 @@ class Test_Pin: XCTestCase {
         XCTAssertEqual(constraint.constant, 20)
     }
 
+    func testCenters() throws {
+        let pin = sibling1
+            .pin(to: parent)
+            .centers()
+            .activate()
+
+        guard let horizontal = pin.constraint(ofType: .horizontalCenters) else {
+            return XCTFail()
+        }
+        guard let vertical = pin.constraint(ofType: .verticalCenters) else {
+            return XCTFail()
+        }
+
+        XCTAssertTrue(horizontal.isActive)
+        XCTAssertTrue(vertical.isActive)
+        XCTAssertEqual(horizontal.firstAttribute, .centerX)
+        XCTAssertEqual(vertical.firstAttribute, .centerY)
+    }
+
     func testCenterX() throws {
         let pin = sibling1
             .pin(to: parent)
@@ -202,7 +221,7 @@ class Test_Pin: XCTestCase {
     func testWidth() throws {
         let pin = sibling1
             .pin
-            .width(constaint: 100)
+            .width(constant: 100)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .width) else {
@@ -216,7 +235,7 @@ class Test_Pin: XCTestCase {
     func testHeight() throws {
         let pin = sibling1
             .pin
-            .height(constaint: 100)
+            .height(constant: 100)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .height) else {
@@ -230,7 +249,7 @@ class Test_Pin: XCTestCase {
     func testSameWidthAndHeight() throws {
         let pin = sibling1
             .pin
-            .height(constaint: 100)
+            .height(constant: 100)
             .widthToHeight(multiplier: 0.5)
             .activate()
 
@@ -247,7 +266,7 @@ class Test_Pin: XCTestCase {
     func testSameHeightAndWidth() throws {
         let pin = sibling1
             .pin
-            .width(constaint: 100)
+            .width(constant: 100)
             .heightToWidth(multiplier: 0.5)
             .activate()
 
