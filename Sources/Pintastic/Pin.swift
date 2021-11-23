@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-/// Syntactic sugar for autolayout
+/// A simple wrapper around autolayout
 ///
 /// A pin can have two types of relationships:
 /// - `.discrete`: The item will not be pinned to another iteam (such as for width and height configurations)
@@ -252,8 +252,8 @@ public class Pin {
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func leadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.leadingEdgeToHorizontalCenter) { other in
+    public func leadingToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.leadingToHorizontalCenter) { other in
             primaryItem.leadingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -261,8 +261,8 @@ public class Pin {
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func trailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.trailingEdgeToHorizontalCenter) { other in
+    public func trailingToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.trailingToHorizontalCenter) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
     }
@@ -270,8 +270,8 @@ public class Pin {
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func topEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.topEdgeToVerticalCenter) { other in
+    public func topToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.topToVerticalCenter) { other in
             primaryItem.topAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
@@ -279,8 +279,8 @@ public class Pin {
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func bottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
-        addRelationalConstraint(.bottomEdgeToVerticalCenter) { other in
+    public func bottomToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+        addRelationalConstraint(.bottomToVerticalCenter) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
     }
