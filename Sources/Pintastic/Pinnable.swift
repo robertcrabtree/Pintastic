@@ -45,7 +45,7 @@ public extension Pinnable {
         SinglePin(item: self)
     }
 
-    /// Use the `makePin(to:)` method to apply constraints in relation to another item.
+    /// Use the `pin(to:)` method to apply constraints in relation to another item.
     ///
     /// The following example pins the edges of the root item to the other item
     /// ```
@@ -57,7 +57,7 @@ public extension Pinnable {
     ///
     /// - Parameter other: The other `Pinnable` item to create a relationship with
     /// - Returns: A reference to the `Pin`
-    func makePin(to other: Pinnable) -> DoublePin {
+    func pin(to other: Pinnable) -> DoublePin {
         DoublePin(primaryItem: self, secondaryItem: other)
     }
 }
