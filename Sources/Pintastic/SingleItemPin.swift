@@ -48,6 +48,22 @@ public final class SingleItemPin: PinBase<SingleItemPinConstraint> {
         )
     }
 
+    /// Constrain the primary item width and height to the specified values
+    /// - Parameters:
+    ///   - width: The item width
+    ///   - height: The item height
+    /// - Returns: A reference to the `SingleItemPin`
+    public func pin(width: CGFloat, height: CGFloat) -> SingleItemPin {
+        pinWidth(constant: width).pinHeight(constant: height)
+    }
+
+    /// Constrain the primary item size to the specified value
+    /// - Parameter size: The item size
+    /// - Returns: A reference to the `SingleItemPin`
+    public func pin(size: CGSize) -> SingleItemPin {
+        pin(width: size.width, height: size.height)
+    }
+
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `SingleItemPin`
