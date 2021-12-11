@@ -320,7 +320,7 @@ class Test_Pin: XCTestCase {
             .leadingEdgeToHorizontalCenter(constant: 20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .leadingToHorizontalCenter) else {
+        guard let constraint = pin.constraint(ofType: .leadingEdgeToHorizontalCenter) else {
             return XCTFail()
         }
 
@@ -336,7 +336,7 @@ class Test_Pin: XCTestCase {
             .trailingEdgeToHorizontalCenter(constant: -20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .trailingToHorizontalCenter) else {
+        guard let constraint = pin.constraint(ofType: .trailingEdgeToHorizontalCenter) else {
             return XCTFail()
         }
 
@@ -352,7 +352,7 @@ class Test_Pin: XCTestCase {
             .topEdgeToVerticalCenter(constant: 20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .topToVerticalCenter) else {
+        guard let constraint = pin.constraint(ofType: .topEdgeToVerticalCenter) else {
             return XCTFail()
         }
 
@@ -368,7 +368,7 @@ class Test_Pin: XCTestCase {
             .bottomEdgeToVerticalCenter(constant: -20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .bottomToVerticalCenter) else {
+        guard let constraint = pin.constraint(ofType: .bottomEdgeToVerticalCenter) else {
             return XCTFail()
         }
 
