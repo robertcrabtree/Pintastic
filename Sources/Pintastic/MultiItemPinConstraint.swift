@@ -40,10 +40,10 @@ public enum MultiItemPinConstraint: String {
     case below = "pin.relational.top.bottom"
 
     /// Relational constraint with leading edge of primary item pinned to trailing edge of second item
-    case toRight = "pin.relational.leading.trailing"
+    case after = "pin.relational.leading.trailing"
 
     /// Relational constraint with trailing edge of primary item pinned to leading edge of second item
-    case toLeft = "pin.relational.trailing.leading"
+    case before = "pin.relational.trailing.leading"
 
     /// Relational constraint with horizontal centers pinned
     case horizontalCenters = "pin.relational.hcenter.hcenter"

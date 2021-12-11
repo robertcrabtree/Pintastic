@@ -110,10 +110,10 @@ class Test_Pin: XCTestCase {
     func testBefore() throws {
         let pin = sibling1
             .pin(to: sibling2)
-            .pinToLeft(constant: 20)
+            .pinBefore(constant: 20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .toLeft) else {
+        guard let constraint = pin.constraint(ofType: .before) else {
             return XCTFail()
         }
 
@@ -126,10 +126,10 @@ class Test_Pin: XCTestCase {
     func testAfter() throws {
         let pin = sibling1
             .pin(to: sibling2)
-            .pinToRight(constant: -20)
+            .pinAfter(constant: -20)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .toRight) else {
+        guard let constraint = pin.constraint(ofType: .after) else {
             return XCTFail()
         }
 

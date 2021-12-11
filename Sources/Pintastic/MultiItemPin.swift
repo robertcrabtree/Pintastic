@@ -127,9 +127,9 @@ public final class MultiItemPin: PinBase<MultiItemPinConstraint> {
     /// Pin the trailing edge of the primary item to the leading edge of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `MultiItemPin`
-    public func pinToLeft(constant: CGFloat = 0.0) -> MultiItemPin {
+    public func pinBefore(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
-            .toLeft,
+            .before,
             constraint: primaryItem.trailingAnchor.constraint(
                 equalTo: secondaryItem.leadingAnchor,
                 constant: constant
@@ -140,9 +140,9 @@ public final class MultiItemPin: PinBase<MultiItemPinConstraint> {
     /// Pin the leading edge of the primary item to the trailing edge of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `MultiItemPin`
-    public func pinToRight(constant: CGFloat = 0.0) -> MultiItemPin {
+    public func pinAfter(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
-            .toRight,
+            .after,
             constraint: primaryItem.leadingAnchor.constraint(
                 equalTo: secondaryItem.trailingAnchor,
                 constant: constant
