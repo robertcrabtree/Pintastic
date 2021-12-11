@@ -1,11 +1,11 @@
 # Pintastic
 
-Pintastic is a Swift framework for iOS that enables developers to layout views easily and quickly.
+Pintastic is a Swift Package for iOS that enables developers to layout views quickly and easily.
 
 ## Why Use Pintastic
 
 * Method chaining makes Pintastic fun and easy to use. Save a lot of typing and start getting stuff done!
-* It's lightweight and low risk.
+* Because Pintastic is lightweight it is also low risk.
 
 ```swift
 let container = UIView()
@@ -40,18 +40,20 @@ nested
 
 * Easy to use wrapper around autolayout
 * Supports most common layout scenarios
-* Integrates seamlessly with `NSLayoutConstraint` and `NSLayoutAnchor` when more fine-tuning is required
+* Integrates seamlessly with `NSLayoutConstraint` and `NSLayoutAnchor` when more intricate layouts are required
 * Method chaining means fewer constants and variables
 * Supports `UIView` and `UILayoutGuide`
 * Lightweight
 
 ## Getting Started
 
-More on this soon.
+Pintastic comes as a Swift Package and can be installed using the Swift Package Manager.
 
-## Basic Idea
+From Xcode go to File -> Add Packages. Copy and paste the following into the search box:
 
-More on this soon.
+```
+https://github.com/robertcrabtree/Pintastic.git
+```
 
 ## Examples
 
@@ -161,10 +163,6 @@ if let heightConstraint = pin.constraint(ofType: .height) {
     heightConstraint.constant *= 2.0
 }
 ```
-
-## Contributing
-
-More on this soon.
 
 ## License
 
