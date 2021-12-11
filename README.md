@@ -51,7 +51,7 @@ More on this soon.
 
 ## Basic Idea
 
-There are two types of pins. A `SinglePin` and a `DoublePin`. Use the `SinglePin` for sizing a `UIView` when the size is independent of other views. Use the `DoublePin` when positioning or sizing a `UIView` in relation to another `UIView`.
+More on this soon.
 
 ## Examples
 
