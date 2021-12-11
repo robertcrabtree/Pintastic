@@ -19,14 +19,13 @@
 import Foundation
 import UIKit
 
-public final class SingleItemPin: Pinning {
-
-    public var constraints: [String : NSLayoutConstraint] = [:]
+public final class SingleItemPin: PinBase<SingleItemPinConstraint> {
 
     /// Initialize a `SingleItemPin` with the item to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
     public init(item: Pinnable) {
         self.item = item
+        super.init()
     }
 
     /// Constrain the width of the primary item to the the specified constant
@@ -76,8 +75,4 @@ public final class SingleItemPin: Pinning {
     }
 
     private let item: Pinnable
-
-    private func addConstraint(_ type: Constraint, constraint: NSLayoutConstraint) -> Self {
-        addConstraint(withIdentifier: type.rawValue, constraint: constraint)
-    }
 }

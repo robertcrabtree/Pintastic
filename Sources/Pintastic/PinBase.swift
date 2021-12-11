@@ -19,14 +19,9 @@
 import Foundation
 import UIKit
 
-/// A protocol that defines an interface for manipulating constraints such as add, remove, find, activate, and deactivate.
+/// A base class that defines methods for manipulating constraints such as add, remove, find, activate, and deactivate.
 ///
-public protocol Pinning: AnyObject {
-
-    associatedtype Constraint: RawRepresentable where Constraint.RawValue == String
-
-    var constraints: [String: NSLayoutConstraint] { get set }
-
+public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.RawValue == String {
 
     /// Add a custom constraint
     ///
@@ -40,7 +35,12 @@ public protocol Pinning: AnyObject {
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
     /// - Returns: A reference to the `Pinning` instance
-    func addConstraint(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Self
+    public func addConstraint(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Self {
+        assert(constraints[identifier] == nil, "A constraint identifier \(identifier) already exists")
+        constraint.identifier = identifier
+        constraints[identifier] = constraint
+        return self
+    }
 
     /// Add a custom constraint
     ///
@@ -54,7 +54,9 @@ public protocol Pinning: AnyObject {
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
     /// - Returns: A reference to the `Pinning` instance
-    func addConstraint(withIdentifier identifier: String, constraint: () -> NSLayoutConstraint) -> Self
+    public func addConstraint(withIdentifier identifier: String, constraint: () -> NSLayoutConstraint) -> Self {
+        addConstraint(withIdentifier: identifier, constraint: constraint())
+    }
 
     /// Request a constraint of the specified type
     ///
@@ -64,10 +66,12 @@ public protocol Pinning: AnyObject {
     ///   - type: The type of constraint
     ///   - handler: A closure that passes the constraint to the caller
     /// - Returns: A reference to the `Pinning` instance
-    func constraint(
+    public func constraint(
         ofType type: Constraint,
         handler: (NSLayoutConstraint?) -> Void
-    ) -> Self
+    ) -> Self {
+        constraint(withIdentifier: type.rawValue, handler: handler)
+    }
 
     /// Request a constraint of the specified type
     ///
@@ -76,7 +80,9 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - type: The type of constraint
     /// - Returns: The requested constraint
-    func constraint(ofType type: Constraint) -> NSLayoutConstraint?
+    public func constraint(ofType type: Constraint) -> NSLayoutConstraint? {
+        constraint(withIdentifier: type.rawValue)
+    }
 
     /// Request a constraint with the specified `identifier` added via the `addConstraint(withIdentifier:constraint:)` method
     ///
@@ -84,10 +90,13 @@ public protocol Pinning: AnyObject {
     ///   - identifier: The constraint identifier
     ///   - handler: A closure that passes the constraint to the caller
     /// - Returns: A reference to the `Pinning` instance
-    func constraint(
+    public func constraint(
         withIdentifier identifier: String,
         handler: (NSLayoutConstraint?) -> Void
-    ) -> Self
+    ) -> Self {
+        handler(constraint(withIdentifier: identifier))
+        return self
+    }
 
     /// Request a constraint with the specified `identifier` added via the `addConstraint(withIdentifier:constraint:)` method
     ///
@@ -96,7 +105,9 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - identifier: The constraint identifier
     /// - Returns: The requested constraint
-    func constraint(withIdentifier identifier: String) -> NSLayoutConstraint?
+    public func constraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
+        constraints[identifier]
+    }
 
     /// Activates all of the previously specified constraints
     ///
@@ -111,23 +122,32 @@ public protocol Pinning: AnyObject {
     ///
     /// - Returns: A reference to the `Pinning` instance
     @discardableResult
-    func activate() -> Self
+    public func activate() -> Self {
+        NSLayoutConstraint.activate(constraints.values.map { $0 })
+        return self
+    }
 
     /// Activate the specified constraint
     ///
     /// - Parameters:
     ///   - type: The constraint type
-    func activateConstraint(ofType type: Constraint)
+    public func activateConstraint(ofType type: Constraint) {
+        self.constraint(ofType: type)?.isActive = true
+    }
 
     /// Activate the specified constraint
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
-    func activateConstraint(withIdentifier identifier: String)
+    public func activateConstraint(withIdentifier identifier: String) {
+        constraint(withIdentifier: identifier)?.isActive = true
+    }
 
     /// Deactivate all constraints
     ///
-    func deactivate()
+    public func deactivate() {
+        NSLayoutConstraint.deactivate(constraints.values.map { $0 })
+    }
 
     /// Deactivate the specified constraint
     ///
@@ -135,7 +155,9 @@ public protocol Pinning: AnyObject {
     ///
     /// - Parameters:
     ///   - type: The constraint type
-    func deactivateConstraint(ofType type: Constraint)
+    public func deactivateConstraint(ofType type: Constraint) {
+        constraint(ofType: type)?.isActive = false
+    }
 
     /// Deactivate the specified constraint
     ///
@@ -143,7 +165,9 @@ public protocol Pinning: AnyObject {
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
-    func deactivateConstraint(withIdentifier identifier: String)
+    public func deactivateConstraint(withIdentifier identifier: String) {
+        constraint(withIdentifier: identifier)?.isActive = false
+    }
 
     /// Remove the specified constraint
     ///
@@ -153,7 +177,9 @@ public protocol Pinning: AnyObject {
     ///   - type: The constraint type
     /// - Returns: The requested constraint
     @discardableResult
-    func removeConstraint(ofType type: Constraint) -> NSLayoutConstraint?
+    public func removeConstraint(ofType type: Constraint) -> NSLayoutConstraint? {
+        removeConstraint(withIdentifier: type.rawValue)
+    }
 
     /// Remove the specified constraint
     ///
@@ -163,6 +189,15 @@ public protocol Pinning: AnyObject {
     ///   - identifier: The constraint identifier
     /// - Returns: The requested constraint
     @discardableResult
-    func removeConstraint(withIdentifier identifier: String) -> NSLayoutConstraint?
+    public func removeConstraint(withIdentifier identifier: String) -> NSLayoutConstraint? {
+        constraints.removeValue(forKey: identifier)
+    }
 
+    internal var constraints: [String : NSLayoutConstraint] = [:]
+
+    internal init() {}
+
+    internal func addConstraint(_ type: Constraint, constraint: NSLayoutConstraint) -> Self {
+        addConstraint(withIdentifier: type.rawValue, constraint: constraint)
+    }
 }

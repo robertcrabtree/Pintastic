@@ -29,9 +29,7 @@ import UIKit
 ///     .pinEdges()
 ///     .activate()
 /// ```
-public final class MultiItemPin: Pinning {
-
-    public var constraints: [String : NSLayoutConstraint] = [:]
+public final class MultiItemPin: PinBase<MultiItemPinConstraint> {
 
     /// Initialize a `MultiItemPin` with the item(s) to apply constraints to
     /// - Parameter primaryItem: The `Pinnable` item you wish to apply constraints to
@@ -39,6 +37,7 @@ public final class MultiItemPin: Pinning {
     public init(primaryItem: Pinnable, secondaryItem: Pinnable) {
         self.primaryItem = primaryItem
         self.secondaryItem = secondaryItem
+        super.init()
     }
 
     /// Pin the edges of the primary item to the secondary item
@@ -269,10 +268,6 @@ public final class MultiItemPin: Pinning {
                 constant: constant
             )
         )
-    }
-
-    private func addConstraint(_ type: Constraint, constraint: NSLayoutConstraint) -> Self {
-        addConstraint(withIdentifier: type.rawValue, constraint: constraint)
     }
 
     private let primaryItem: Pinnable
