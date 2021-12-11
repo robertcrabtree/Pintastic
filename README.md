@@ -99,7 +99,7 @@ Here's how you would position a view relative to another.
 ```Swift
 leftView
     .pin(to: centerView)
-    .pinToLeft(constant: -20)
+    .pinBefore(constant: -20)
     .activate()
 
 topView
