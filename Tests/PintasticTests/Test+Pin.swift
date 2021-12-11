@@ -548,11 +548,11 @@ class Test_Pin: XCTestCase {
             .activate()
 
         let leadingByType = pin.constraint(ofType: .leadingEdges)
-        let leadingByIdentifier = pin.constraint(withIdentifier: DoublePin.Constraint.leadingEdges.rawValue)
+        let leadingByIdentifier = pin.constraint(withIdentifier: MultiItemPin.Constraint.leadingEdges.rawValue)
         let heightByIdentifier = pin.constraint(withIdentifier: "sibling1.height")
 
-        XCTAssertEqual(leadingByType?.identifier, DoublePin.Constraint.leadingEdges.rawValue)
-        XCTAssertEqual(leadingByIdentifier?.identifier, DoublePin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(leadingByType?.identifier, MultiItemPin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(leadingByIdentifier?.identifier, MultiItemPin.Constraint.leadingEdges.rawValue)
         XCTAssertEqual(heightByIdentifier?.identifier, "sibling1.height")
     }
 }

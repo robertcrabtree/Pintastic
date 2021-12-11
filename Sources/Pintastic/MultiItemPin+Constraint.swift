@@ -18,7 +18,7 @@
 
 import Foundation
 
-public extension DoublePin {
+public extension MultiItemPin {
 
     /// Represents a constraint that can be applied to one or more `Pinnable` items
     enum Constraint: String {

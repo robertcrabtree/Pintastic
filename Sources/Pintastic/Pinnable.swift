@@ -52,8 +52,8 @@ public extension Pinnable {
     ///     .height(constant: 100)
     ///     .activate()
     /// ```
-    func pin() -> SinglePin {
-        SinglePin(item: self)
+    func pin() -> SingleItemPin {
+        SingleItemPin(item: self)
     }
 
     /// Use the `pin(to:)` method to apply constraints in relation to another item.
@@ -68,8 +68,8 @@ public extension Pinnable {
     ///
     /// - Parameter other: The other `Pinnable` item to create a relationship with
     /// - Returns: A reference to the `Pin`
-    func pin(to other: Pinnable) -> DoublePin {
-        DoublePin(primaryItem: self, secondaryItem: other)
+    func pin(to other: Pinnable) -> MultiItemPin {
+        MultiItemPin(primaryItem: self, secondaryItem: other)
     }
 }
 

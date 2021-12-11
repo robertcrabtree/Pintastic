@@ -19,7 +19,7 @@
 import Foundation
 import UIKit
 
-public final class SinglePin: Pinning {
+public final class SingleItemPin: Pinning {
 
     public var constraints: [String : NSLayoutConstraint] = [:]
 
@@ -32,7 +32,7 @@ public final class SinglePin: Pinning {
     /// Constrain the width of the primary item to the the specified constant
     /// - Parameter constant: The desired width
     /// - Returns: A reference to the `Pin`
-    public func pinWidth(constant: CGFloat) -> SinglePin {
+    public func pinWidth(constant: CGFloat) -> SingleItemPin {
         addConstraint(
             .width,
             constraint: item.widthAnchor.constraint(equalToConstant: constant)
@@ -42,7 +42,7 @@ public final class SinglePin: Pinning {
     /// Constrain the height of the primary item to the the specified constant
     /// - Parameter constant: The desired height
     /// - Returns: A reference to the `Pin`
-    public func pinHeight(constant: CGFloat) -> SinglePin {
+    public func pinHeight(constant: CGFloat) -> SingleItemPin {
         addConstraint(
             .height,
             constraint: item.heightAnchor.constraint(equalToConstant: constant)
@@ -52,7 +52,7 @@ public final class SinglePin: Pinning {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func pinWidthEqualToHeight(multiplier: CGFloat = 1.0) -> SinglePin {
+    public func pinWidthEqualToHeight(multiplier: CGFloat = 1.0) -> SingleItemPin {
         addConstraint(
             .widthEqualToHeight,
             constraint: item.widthAnchor.constraint(
@@ -65,7 +65,7 @@ public final class SinglePin: Pinning {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func pinHeightEqualToWidth(multiplier: CGFloat = 1.0) -> SinglePin {
+    public func pinHeightEqualToWidth(multiplier: CGFloat = 1.0) -> SingleItemPin {
         addConstraint(
             .heightEqualToWidth,
             constraint: item.heightAnchor.constraint(

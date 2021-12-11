@@ -18,7 +18,7 @@
 
 import Foundation
 
-public extension SinglePin {
+public extension SingleItemPin {
 
     /// Represents a constraint that can be applied to one or more `Pinnable` items
     enum Constraint: String {
