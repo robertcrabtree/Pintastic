@@ -41,9 +41,9 @@ public final class SinglePin: Pinning {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func widthToHeight(multiplier: CGFloat = 1.0) -> SinglePin {
+    public func widthEqualToHeight(multiplier: CGFloat = 1.0) -> SinglePin {
         addConstraint(
-            .widthToHeight,
+            .widthEqualToHeight,
             constraint: primaryItem.widthAnchor.constraint(
                 equalTo: primaryItem.heightAnchor,
                 multiplier: multiplier
@@ -54,9 +54,9 @@ public final class SinglePin: Pinning {
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func heightToWidth(multiplier: CGFloat = 1.0) -> SinglePin {
+    public func heightEqualToWidth(multiplier: CGFloat = 1.0) -> SinglePin {
         addConstraint(
-            .heightToWidth,
+            .heightEqualToWidth,
             constraint: primaryItem.heightAnchor.constraint(
                 equalTo: primaryItem.widthAnchor,
                 multiplier: multiplier

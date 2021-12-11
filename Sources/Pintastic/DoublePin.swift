@@ -140,8 +140,8 @@ public final class DoublePin: Pinning {
     /// Constrain the primary item width to the width of the secondary item
     /// - Parameter multiplier: The width multiplier
     /// - Returns: A reference to the `Pin`
-    public func widths(multiplier: CGFloat = 1.0) -> DoublePin {
-        addRelationalConstraint(.widths) { other in
+    public func equalWidths(multiplier: CGFloat = 1.0) -> DoublePin {
+        addRelationalConstraint(.equalWidths) { other in
             primaryItem.widthAnchor.constraint(equalTo: other.widthAnchor, multiplier: multiplier)
         }
     }
@@ -149,8 +149,8 @@ public final class DoublePin: Pinning {
     /// Constrain the primary item height to the width of the secondary item
     /// - Parameter multiplier: The height multiplier
     /// - Returns: A reference to the `Pin`
-    public func heights(multiplier: CGFloat = 1.0) -> DoublePin {
-        addRelationalConstraint(.heights) { other in
+    public func equalHeights(multiplier: CGFloat = 1.0) -> DoublePin {
+        addRelationalConstraint(.equalHeights) { other in
             primaryItem.heightAnchor.constraint(equalTo: other.heightAnchor, multiplier: multiplier)
         }
     }

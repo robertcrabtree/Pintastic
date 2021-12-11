@@ -250,10 +250,10 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin()
             .height(constant: 100)
-            .widthToHeight(multiplier: 0.5)
+            .widthEqualToHeight(multiplier: 0.5)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .widthToHeight) else {
+        guard let constraint = pin.constraint(ofType: .widthEqualToHeight) else {
             return XCTFail()
         }
 
@@ -267,10 +267,10 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin()
             .width(constant: 100)
-            .heightToWidth(multiplier: 0.5)
+            .heightEqualToWidth(multiplier: 0.5)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .heightToWidth) else {
+        guard let constraint = pin.constraint(ofType: .heightEqualToWidth) else {
             return XCTFail()
         }
 
@@ -283,10 +283,10 @@ class Test_Pin: XCTestCase {
     func testWidths() throws {
         let pin = sibling1
             .pin(to: sibling2)
-            .widths(multiplier: 0.8)
+            .equalWidths(multiplier: 0.8)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .widths) else {
+        guard let constraint = pin.constraint(ofType: .equalWidths) else {
             return XCTFail()
         }
 
@@ -300,10 +300,10 @@ class Test_Pin: XCTestCase {
     func testHeights() throws {
         let pin = sibling1
             .pin(to: sibling2)
-            .heights(multiplier: 0.8)
+            .equalHeights(multiplier: 0.8)
             .activate()
 
-        guard let constraint = pin.constraint(ofType: .heights) else {
+        guard let constraint = pin.constraint(ofType: .equalHeights) else {
             return XCTFail()
         }
 

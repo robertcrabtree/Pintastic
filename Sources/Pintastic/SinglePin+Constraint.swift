@@ -19,9 +19,9 @@ public extension SinglePin {
         case height = "pin.discrete.height"
 
         /// Discrete constraint with equal width and height
-        case widthToHeight = "pin.discrete.width.height"
+        case widthEqualToHeight = "pin.discrete.width.height"
 
         /// Discrete constraint with equal height and width
-        case heightToWidth = "pin.discrete.height.width"
+        case heightEqualToWidth = "pin.discrete.height.width"
     }
 }

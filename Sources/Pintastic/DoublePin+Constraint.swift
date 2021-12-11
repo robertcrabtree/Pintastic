@@ -43,10 +43,10 @@ public extension DoublePin {
         case verticalCenters = "pin.relational.vcenter.vcenter"
 
         /// Relational constraint with equal widths
-        case widths = "pin.relational.width.width"
+        case equalWidths = "pin.relational.width.width"
 
         /// Relational constraint with equal heights
-        case heights = "pin.relational.height.height"
+        case equalHeights = "pin.relational.height.height"
 
         /// Relational constraint with leading edge of primary item constrained to horizontal center of second item
         case leadingToHorizontalCenter = "pin.relational.leading.hcenter"
