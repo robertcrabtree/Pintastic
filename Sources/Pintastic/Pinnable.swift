@@ -51,7 +51,7 @@ public extension Pinnable {
     /// ```
     /// view
     ///     .pin(to: containerView)
-    ///     .edges()
+    ///     .pinEdges()
     ///     .activate()
     /// ```
     ///

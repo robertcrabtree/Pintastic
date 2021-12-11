@@ -21,14 +21,14 @@ public final class DoublePin: Pinning {
 
     /// Pin the edges of the primary item to the secondary item
     /// - Returns: A reference to the `Pin`
-    public func edges() -> DoublePin {
-        leadingEdges().trailingEdges().topEdges().bottomEdges()
+    public func pinEdges() -> DoublePin {
+        pinLeadingEdges().pinTrailingEdges().pinTopEdges().pinBottomEdges()
     }
 
     /// Pin the leading edges of the primary item to the secondary item
     /// - Parameter constant: A positive value will inset the leading edge by this value.
     /// - Returns: A reference to the `Pin`
-    public func leadingEdges(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinLeadingEdges(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .leadingEdges,
             constraint: primaryItem.leadingAnchor.constraint(
@@ -41,7 +41,7 @@ public final class DoublePin: Pinning {
     /// Pin the trailing edges of the primary item to the secondary item
     /// - Parameter constant: A negative value will inset the trailing edge by this value.
     /// - Returns: A reference to the `Pin`
-    public func trailingEdges(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinTrailingEdges(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .trailingEdges,
             constraint: primaryItem.trailingAnchor.constraint(
@@ -54,7 +54,7 @@ public final class DoublePin: Pinning {
     /// Pin the top edge of the primary item to the top edge of the secondary item.
     /// - Parameter constant: A positive value will inset the top edge by this value.
     /// - Returns: A reference to the `Pin`
-    public func topEdges(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinTopEdges(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .topEdges,
             constraint: primaryItem.topAnchor.constraint(
@@ -67,7 +67,7 @@ public final class DoublePin: Pinning {
     /// Pin the bottom edge of the primary item to the bottom edge of the secondary item.
     /// - Parameter constant: A negative value will inset the bottom edge by this value.
     /// - Returns: A reference to the `Pin`
-    public func bottomEdges(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinBottomEdges(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .bottomEdges,
             constraint: primaryItem.bottomAnchor.constraint(
@@ -80,7 +80,7 @@ public final class DoublePin: Pinning {
     /// Pin the bottom of the primary item to the top of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func above(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinAbove(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .above,
             constraint: primaryItem.bottomAnchor.constraint(
@@ -93,7 +93,7 @@ public final class DoublePin: Pinning {
     /// Pin the top of the primary item to the bottom of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func below(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinBelow(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .below,
             constraint: primaryItem.topAnchor.constraint(
@@ -106,9 +106,9 @@ public final class DoublePin: Pinning {
     /// Pin the trailing edge of the primary item to the leading edge of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func before(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinToLeft(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
-            .before,
+            .toLeft,
             constraint: primaryItem.trailingAnchor.constraint(
                 equalTo: secondaryItem.leadingAnchor,
                 constant: constant
@@ -119,9 +119,9 @@ public final class DoublePin: Pinning {
     /// Pin the leading edge of the primary item to the trailing edge of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
     /// - Returns: A reference to the `Pin`
-    public func after(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinToRight(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
-            .after,
+            .toRight,
             constraint: primaryItem.leadingAnchor.constraint(
                 equalTo: secondaryItem.trailingAnchor,
                 constant: constant
@@ -131,14 +131,14 @@ public final class DoublePin: Pinning {
 
     /// Pin the horizontal and vertical centers of the primary to the secondary item
     /// - Returns: A reference to the `Pin`
-    public func centers() -> DoublePin {
-        horizontalCenters().verticalCenters()
+    public func pinCenters() -> DoublePin {
+        pinHorizontalCenters().pinVerticalCenters()
     }
 
     /// Pin the horizontal centers of the primary item and the secondary item
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func horizontalCenters(multiplier: CGFloat = 1.0) -> DoublePin {
+    public func pinHorizontalCenters(multiplier: CGFloat = 1.0) -> DoublePin {
         addConstraint(
             .horizontalCenters,
             constraint: NSLayoutConstraint(
@@ -156,7 +156,7 @@ public final class DoublePin: Pinning {
     /// Pin the vertical centers of the primary item and the secondary item
     /// - Parameter multiplier: The multiplier
     /// - Returns: A reference to the `Pin`
-    public func verticalCenters(multiplier: CGFloat = 1.0) -> DoublePin {
+    public func pinVerticalCenters(multiplier: CGFloat = 1.0) -> DoublePin {
         addConstraint(
             .verticalCenters,
             constraint: NSLayoutConstraint(
@@ -174,9 +174,9 @@ public final class DoublePin: Pinning {
     /// Constrain the primary item width to the width of the secondary item
     /// - Parameter multiplier: The width multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalWidths(multiplier: CGFloat = 1.0) -> DoublePin {
+    public func pinWidths(multiplier: CGFloat = 1.0) -> DoublePin {
         addConstraint(
-            .equalWidths,
+            .widths,
             constraint: primaryItem.widthAnchor.constraint(
                 equalTo: secondaryItem.widthAnchor,
                 multiplier: multiplier
@@ -187,9 +187,9 @@ public final class DoublePin: Pinning {
     /// Constrain the primary item height to the width of the secondary item
     /// - Parameter multiplier: The height multiplier
     /// - Returns: A reference to the `Pin`
-    public func equalHeights(multiplier: CGFloat = 1.0) -> DoublePin {
+    public func pinHeights(multiplier: CGFloat = 1.0) -> DoublePin {
         addConstraint(
-            .equalHeights,
+            .heights,
             constraint: primaryItem.heightAnchor.constraint(
                 equalTo: secondaryItem.heightAnchor,
                 multiplier: multiplier
@@ -200,7 +200,7 @@ public final class DoublePin: Pinning {
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func leadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinLeadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .leadingEdgeToHorizontalCenter,
             constraint: primaryItem.leadingAnchor.constraint(
@@ -213,7 +213,7 @@ public final class DoublePin: Pinning {
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func trailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinTrailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .trailingEdgeToHorizontalCenter,
             constraint: primaryItem.trailingAnchor.constraint(
@@ -226,7 +226,7 @@ public final class DoublePin: Pinning {
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func topEdgeToVerticalCenter(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinTopEdgeToVerticalCenter(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .topEdgeToVerticalCenter,
             constraint: primaryItem.topAnchor.constraint(
@@ -239,7 +239,7 @@ public final class DoublePin: Pinning {
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func bottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> DoublePin {
+    public func pinBottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> DoublePin {
         addConstraint(
             .bottomEdgeToVerticalCenter,
             constraint: primaryItem.bottomAnchor.constraint(
