@@ -41,7 +41,7 @@ class Test_Pin: XCTestCase {
 
     func testEdges() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinEdges()
             .activate()
 
@@ -53,7 +53,7 @@ class Test_Pin: XCTestCase {
 
     func testLeading() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinLeadingEdges(constant: 20)
             .activate()
 
@@ -67,7 +67,7 @@ class Test_Pin: XCTestCase {
 
     func testTrailing() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinTrailingEdges(constant: -20)
             .activate()
 
@@ -81,7 +81,7 @@ class Test_Pin: XCTestCase {
 
     func testTops() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinTopEdges(constant: 20)
             .activate()
 
@@ -95,7 +95,7 @@ class Test_Pin: XCTestCase {
 
     func testBottoms() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinBottomEdges(constant: -20)
             .activate()
 
@@ -109,7 +109,7 @@ class Test_Pin: XCTestCase {
 
     func testBefore() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinToLeft(constant: 20)
             .activate()
 
@@ -125,7 +125,7 @@ class Test_Pin: XCTestCase {
 
     func testAfter() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinToRight(constant: -20)
             .activate()
 
@@ -141,7 +141,7 @@ class Test_Pin: XCTestCase {
 
     func testAbove() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinAbove(constant: -20)
             .activate()
 
@@ -157,7 +157,7 @@ class Test_Pin: XCTestCase {
 
     func testBelow() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinBelow(constant: 20)
             .activate()
 
@@ -173,7 +173,7 @@ class Test_Pin: XCTestCase {
 
     func testCenters() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinCenters()
             .activate()
 
@@ -192,7 +192,7 @@ class Test_Pin: XCTestCase {
 
     func testCenterX() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinHorizontalCenters()
             .activate()
 
@@ -206,7 +206,7 @@ class Test_Pin: XCTestCase {
 
     func testCenterY() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinVerticalCenters()
             .activate()
 
@@ -220,7 +220,7 @@ class Test_Pin: XCTestCase {
 
     func testWidth() throws {
         let pin = sibling1
-            .pin()
+            .makePin()
             .pinWidth(constant: 100)
             .activate()
 
@@ -234,7 +234,7 @@ class Test_Pin: XCTestCase {
 
     func testHeight() throws {
         let pin = sibling1
-            .pin()
+            .makePin()
             .pinHeight(constant: 100)
             .activate()
 
@@ -248,7 +248,7 @@ class Test_Pin: XCTestCase {
 
     func testSameWidthAndHeight() throws {
         let pin = sibling1
-            .pin()
+            .makePin()
             .pinHeight(constant: 100)
             .pinWidthEqualToHeight(multiplier: 0.5)
             .activate()
@@ -265,7 +265,7 @@ class Test_Pin: XCTestCase {
 
     func testSameHeightAndWidth() throws {
         let pin = sibling1
-            .pin()
+            .makePin()
             .pinWidth(constant: 100)
             .pinHeightEqualToWidth(multiplier: 0.5)
             .activate()
@@ -282,7 +282,7 @@ class Test_Pin: XCTestCase {
 
     func testWidths() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinWidths(multiplier: 0.8)
             .activate()
 
@@ -299,7 +299,7 @@ class Test_Pin: XCTestCase {
 
     func testHeights() throws {
         let pin = sibling1
-            .pin(to: sibling2)
+            .makePin(to: sibling2)
             .pinHeights(multiplier: 0.8)
             .activate()
 
@@ -316,7 +316,7 @@ class Test_Pin: XCTestCase {
 
     func testLeadingToCenter() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinLeadingEdgeToHorizontalCenter(constant: 20)
             .activate()
 
@@ -332,7 +332,7 @@ class Test_Pin: XCTestCase {
 
     func testTrailingToCenter() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinTrailingEdgeToHorizontalCenter(constant: -20)
             .activate()
 
@@ -348,7 +348,7 @@ class Test_Pin: XCTestCase {
 
     func testTopToCenter() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinTopEdgeToVerticalCenter(constant: 20)
             .activate()
 
@@ -364,7 +364,7 @@ class Test_Pin: XCTestCase {
 
     func testBottomToCenter() throws {
         let pin = sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinBottomEdgeToVerticalCenter(constant: -20)
             .activate()
 
@@ -386,7 +386,7 @@ class Test_Pin: XCTestCase {
         var bottoms: NSLayoutConstraint?
 
         sibling1
-            .pin(to: parent)
+            .makePin(to: parent)
             .pinEdges()
             .constraint(ofType: .leadingEdges, handler: { constraint in
                 leading = constraint
@@ -415,7 +415,7 @@ class Test_Pin: XCTestCase {
 
     func testSafeArea() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinEdges()
             .activate()
 
@@ -427,7 +427,7 @@ class Test_Pin: XCTestCase {
 
     func testCustomConstraint() throws {
         let pin = sibling1
-            .pin()
+            .makePin()
             .addConstraint(
                 withIdentifier: "sibling1.width",
                 constraint: .width(forPinnableItem: sibling1)
@@ -461,7 +461,7 @@ class Test_Pin: XCTestCase {
 
     func testActivate() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
@@ -474,7 +474,7 @@ class Test_Pin: XCTestCase {
 
     func testActivateConstraint() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
@@ -494,7 +494,7 @@ class Test_Pin: XCTestCase {
 
     func testDeactivate() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
@@ -508,7 +508,7 @@ class Test_Pin: XCTestCase {
 
     func testDeactivateConstraint() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
@@ -523,7 +523,7 @@ class Test_Pin: XCTestCase {
 
     func testRemoveConstraint() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
@@ -540,7 +540,7 @@ class Test_Pin: XCTestCase {
 
     func testIdentifiers() throws {
         let pin = sibling1
-            .pin(to: parent.safeAreaLayoutGuide)
+            .makePin(to: parent.safeAreaLayoutGuide)
             .pinLeadingEdges()
             .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
