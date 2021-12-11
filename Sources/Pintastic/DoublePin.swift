@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  DoublePin.swift
+//  Pintastic
 //
 //  Created by Rob on 12/11/21.
 //
