@@ -22,10 +22,10 @@ import UIKit
 /// An autolayout wrapper that  uses method chaining to constrain views.
 /// Use this class to apply constraints to a view in relation to another view.
 ///
-/// You can create a `MultiItemPin` by calling `pin(to:)` on a `Pinnable` item.
+/// You can create a `MultiItemPin` by calling `makePin(to:)` on a `Pinnable` item.
 /// ```
 /// view
-///     .pin(to: containerView)
+///     .makePin(to: containerView)
 ///     .pinEdges()
 ///     .activate()
 /// ```

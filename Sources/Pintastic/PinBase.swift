@@ -115,7 +115,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     ///
     /// ```
     /// view
-    ///     .pin(to: containerView)
+    ///     .makePin(to: containerView)
     ///     .pinEdges()
     ///     .activate()
     /// ```

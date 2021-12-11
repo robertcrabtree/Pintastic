@@ -43,34 +43,34 @@ public protocol Pinnable {
 
 public extension Pinnable {
 
-    /// Use the `pin()` method to apply trivial constraints to an item such as width and height constraints.
+    /// Use the `makePin()` method to apply trivial constraints to an item such as width and height constraints.
     ///
     /// ```
     /// view
-    ///     .pin()
+    ///     .makePin()
     ///     .pinWidth(constant: 100)
     ///     .pinHeight(constant: 100)
     ///     .activate()
     /// ```
     ///
     /// - Returns: A reference to the `SingleItemPin`
-    func pin() -> SingleItemPin {
+    func makePin() -> SingleItemPin {
         SingleItemPin(item: self)
     }
 
-    /// Use the `pin(to:)` method to apply constraints in relation to another item.
+    /// Use the `makePin(to:)` method to apply constraints in relation to another item.
     ///
     /// The following example pins the edges of the receiver to another item
     /// ```
     /// view
-    ///     .pin(to: containerView)
+    ///     .makePin(to: containerView)
     ///     .pinEdges()
     ///     .activate()
     /// ```
     ///
     /// - Parameter other: The other `Pinnable` item to create a relationship with
     /// - Returns: A reference to the `MultiItemPin`
-    func pin(to other: Pinnable) -> MultiItemPin {
+    func makePin(to other: Pinnable) -> MultiItemPin {
         MultiItemPin(primaryItem: self, secondaryItem: other)
     }
 }
