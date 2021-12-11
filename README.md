@@ -140,6 +140,28 @@ leftView
     .activate()
 ```
 
+#### Modifications
+
+Sometimes you need to alter constraint values beyond the time of initialization.
+
+```Swift
+let pin = subview
+    .pin()
+    .pinWidth(constant: 100)
+    .pinHeight(constant: 100)
+    .activate()
+
+// ...
+
+if let widthConstraint = pin.constraint(ofType: .width) {
+    widthConstraint.constant *= 2.0
+}
+
+if let heightConstraint = pin.constraint(ofType: .height) {
+    heightConstraint.constant *= 2.0
+}
+```
+
 ## Contributing
 
 More on this soon.
