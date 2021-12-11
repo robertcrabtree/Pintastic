@@ -41,8 +41,8 @@ public extension Pinnable {
     ///     .height(constant: 100)
     ///     .activate()
     /// ```
-    func pin() -> Pin {
-        Pin(item: self, type: .discrete)
+    func pin() -> SinglePin {
+        SinglePin(item: self)
     }
 
     /// Use the `pin(to:)` method to apply constraints in relation to another item.
@@ -57,8 +57,8 @@ public extension Pinnable {
     ///
     /// - Parameter other: The other `Pinnable` item to create a relationship with
     /// - Returns: A reference to the `Pin`
-    func pin(to other: Pinnable) -> Pin {
-        Pin(item: self, type: .relational(other))
+    func pin(to other: Pinnable) -> DoublePin {
+        DoublePin(primaryItem: self, secondaryItem: other)
     }
 }
 
