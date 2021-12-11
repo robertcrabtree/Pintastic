@@ -19,26 +19,37 @@
 import Foundation
 import UIKit
 
+/// An autolayout wrapper that  uses method chaining to constrain views.
+/// Use this class to apply constraints to a view in relation to another view.
+///
+/// You can create a `MultiItemPin` by calling `pin(to:)` on a `Pinnable` item.
+/// ```
+/// view
+///     .pin(to: containerView)
+///     .pinEdges()
+///     .activate()
+/// ```
 public final class MultiItemPin: Pinning {
 
     public var constraints: [String : NSLayoutConstraint] = [:]
 
-    /// Initialize a `Pin` with the item(s) to apply constraints to
-    /// - Parameter item: The `Pinnable` item you wish to apply constraints to
+    /// Initialize a `MultiItemPin` with the item(s) to apply constraints to
+    /// - Parameter primaryItem: The `Pinnable` item you wish to apply constraints to
+    /// - Parameter secondaryItem: The second `Pinnable` item you wish to apply constraints to
     public init(primaryItem: Pinnable, secondaryItem: Pinnable) {
         self.primaryItem = primaryItem
         self.secondaryItem = secondaryItem
     }
 
     /// Pin the edges of the primary item to the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinEdges() -> MultiItemPin {
         pinLeadingEdges().pinTrailingEdges().pinTopEdges().pinBottomEdges()
     }
 
     /// Pin the leading edges of the primary item to the secondary item
     /// - Parameter constant: A positive value will inset the leading edge by this value.
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinLeadingEdges(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .leadingEdges,
@@ -51,7 +62,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the trailing edges of the primary item to the secondary item
     /// - Parameter constant: A negative value will inset the trailing edge by this value.
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinTrailingEdges(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .trailingEdges,
@@ -64,7 +75,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the top edge of the primary item to the top edge of the secondary item.
     /// - Parameter constant: A positive value will inset the top edge by this value.
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinTopEdges(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .topEdges,
@@ -77,7 +88,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the bottom edge of the primary item to the bottom edge of the secondary item.
     /// - Parameter constant: A negative value will inset the bottom edge by this value.
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinBottomEdges(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .bottomEdges,
@@ -90,7 +101,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the bottom of the primary item to the top of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinAbove(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .above,
@@ -103,7 +114,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the top of the primary item to the bottom of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinBelow(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .below,
@@ -116,7 +127,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the trailing edge of the primary item to the leading edge of the secondary item
     /// - Parameter constant: A negative value will create space betwen the primary and secondary items
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinToLeft(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .toLeft,
@@ -129,7 +140,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the leading edge of the primary item to the trailing edge of the secondary item
     /// - Parameter constant: A positive value will create space betwen the primary and secondary items
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinToRight(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .toRight,
@@ -141,14 +152,14 @@ public final class MultiItemPin: Pinning {
     }
 
     /// Pin the horizontal and vertical centers of the primary to the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinCenters() -> MultiItemPin {
         pinHorizontalCenters().pinVerticalCenters()
     }
 
     /// Pin the horizontal centers of the primary item and the secondary item
     /// - Parameter multiplier: The multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinHorizontalCenters(multiplier: CGFloat = 1.0) -> MultiItemPin {
         addConstraint(
             .horizontalCenters,
@@ -166,7 +177,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the vertical centers of the primary item and the secondary item
     /// - Parameter multiplier: The multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinVerticalCenters(multiplier: CGFloat = 1.0) -> MultiItemPin {
         addConstraint(
             .verticalCenters,
@@ -184,7 +195,7 @@ public final class MultiItemPin: Pinning {
 
     /// Constrain the primary item width to the width of the secondary item
     /// - Parameter multiplier: The width multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinWidths(multiplier: CGFloat = 1.0) -> MultiItemPin {
         addConstraint(
             .widths,
@@ -197,7 +208,7 @@ public final class MultiItemPin: Pinning {
 
     /// Constrain the primary item height to the width of the secondary item
     /// - Parameter multiplier: The height multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinHeights(multiplier: CGFloat = 1.0) -> MultiItemPin {
         addConstraint(
             .heights,
@@ -210,7 +221,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinLeadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .leadingEdgeToHorizontalCenter,
@@ -223,7 +234,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinTrailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .trailingEdgeToHorizontalCenter,
@@ -236,7 +247,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinTopEdgeToVerticalCenter(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .topEdgeToVerticalCenter,
@@ -249,7 +260,7 @@ public final class MultiItemPin: Pinning {
 
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     public func pinBottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> MultiItemPin {
         addConstraint(
             .bottomEdgeToVerticalCenter,

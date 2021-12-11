@@ -21,7 +21,7 @@ import UIKit
 
 // MARK: - Type definition
 
-/// Types that conform to `Pinnable` can be constrained using the `Pin` class
+/// Types that conform to `Pinnable` can be constrained using the `SingleItemPin` or `MultiItemPin` classes.
 ///
 /// Types that conform to `Pinnable` include:
 /// - `UIView`
@@ -43,22 +43,24 @@ public protocol Pinnable {
 
 public extension Pinnable {
 
-    /// Use the `pin()` method to apply constraints that aren't in relationship with another item.
+    /// Use the `pin()` method to apply trivial constraints to an item such as width and height constraints.
     ///
     /// ```
     /// view
     ///     .pin()
-    ///     .width(constant: 100)
-    ///     .height(constant: 100)
+    ///     .pinWidth(constant: 100)
+    ///     .pinHeight(constant: 100)
     ///     .activate()
     /// ```
+    ///
+    /// - Returns: A reference to the `SingleItemPin`
     func pin() -> SingleItemPin {
         SingleItemPin(item: self)
     }
 
     /// Use the `pin(to:)` method to apply constraints in relation to another item.
     ///
-    /// The following example pins the edges of the root item to the other item
+    /// The following example pins the edges of the receiver to another item
     /// ```
     /// view
     ///     .pin(to: containerView)
@@ -67,7 +69,7 @@ public extension Pinnable {
     /// ```
     ///
     /// - Parameter other: The other `Pinnable` item to create a relationship with
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `MultiItemPin`
     func pin(to other: Pinnable) -> MultiItemPin {
         MultiItemPin(primaryItem: self, secondaryItem: other)
     }

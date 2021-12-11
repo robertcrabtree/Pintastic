@@ -23,7 +23,7 @@ public final class SingleItemPin: Pinning {
 
     public var constraints: [String : NSLayoutConstraint] = [:]
 
-    /// Initialize a `Pin` with the item(s) to apply constraints to
+    /// Initialize a `SingleItemPin` with the item to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
     public init(item: Pinnable) {
         self.item = item
@@ -31,7 +31,7 @@ public final class SingleItemPin: Pinning {
 
     /// Constrain the width of the primary item to the the specified constant
     /// - Parameter constant: The desired width
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `SingleItemPin`
     public func pinWidth(constant: CGFloat) -> SingleItemPin {
         addConstraint(
             .width,
@@ -41,7 +41,7 @@ public final class SingleItemPin: Pinning {
 
     /// Constrain the height of the primary item to the the specified constant
     /// - Parameter constant: The desired height
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `SingleItemPin`
     public func pinHeight(constant: CGFloat) -> SingleItemPin {
         addConstraint(
             .height,
@@ -51,7 +51,7 @@ public final class SingleItemPin: Pinning {
 
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `SingleItemPin`
     public func pinWidthEqualToHeight(multiplier: CGFloat = 1.0) -> SingleItemPin {
         addConstraint(
             .widthEqualToHeight,
@@ -64,7 +64,7 @@ public final class SingleItemPin: Pinning {
 
     /// Constrain the primary item width to the primary item height
     /// - Parameter multiplier: The multiplier
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `SingleItemPin`
     public func pinHeightEqualToWidth(multiplier: CGFloat = 1.0) -> SingleItemPin {
         addConstraint(
             .heightEqualToWidth,

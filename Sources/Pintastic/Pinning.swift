@@ -19,53 +19,7 @@
 import Foundation
 import UIKit
 
-/// A simple wrapper around autolayout
-///
-/// A pin can have two types of relationships:
-/// - `.discrete`: The item will not be pinned to another iteam (such as for width and height configurations)
-/// - `.relational`: The item will be pinned to another item (such as for alignment configurations)
-///
-/// In this example a view's dimensions are constrained to a width and height of 100.0
-///
-/// ```
-/// let pin = Pin(item: view, relationship: .discrete)
-///     .width(constant: 100.0)
-///     .height(constant: 100.0)
-///     .activate()
-/// ```
-/// Another way of accomplishing the same thing:
-///
-/// ```
-/// view
-///     .pin()
-///     .width(constant: 100.0)
-///     .height(constant: 100.0)
-///     .activate()
-/// ```
-///
-/// In this example the primary item's edges are constrained to the edges of the other, or secondary, `Pinnable` item.
-///
-/// ```
-/// let pin = Pin(item: childView, relationship: .relational(containerView)
-///     .leadingEdges()
-///     .trailingEdges()
-///     .topEdges()
-///     .bottomEdges()
-///     .activate()
-/// ```
-///
-/// Another way of accomplishing the same thing:
-///
-/// ```
-/// childView
-///     .pin(to: containerView)
-///     .leadingEdges()
-///     .trailingEdges()
-///     .topEdges()
-///     .bottomEdges()
-///     .activate()
-/// ```
-///
+/// A protocol that defines an interface for manipulating constraints such as add, remove, find, activate, and deactivate.
 ///
 public protocol Pinning: AnyObject {
 
@@ -85,7 +39,7 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `Pinning` instance
     func addConstraint(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Self
 
     /// Add a custom constraint
@@ -99,7 +53,7 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `Pinning` instance
     func addConstraint(withIdentifier identifier: String, constraint: () -> NSLayoutConstraint) -> Self
 
     /// Request a constraint of the specified type
@@ -109,7 +63,7 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - type: The type of constraint
     ///   - handler: A closure that passes the constraint to the caller
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `Pinning` instance
     func constraint(
         ofType type: Constraint,
         handler: (NSLayoutConstraint?) -> Void
@@ -129,7 +83,7 @@ public protocol Pinning: AnyObject {
     /// - Parameters:
     ///   - identifier: The constraint identifier
     ///   - handler: A closure that passes the constraint to the caller
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `Pinning` instance
     func constraint(
         withIdentifier identifier: String,
         handler: (NSLayoutConstraint?) -> Void
@@ -151,11 +105,11 @@ public protocol Pinning: AnyObject {
     /// ```
     /// view
     ///     .pin(to: containerView)
-    ///     .edges()
+    ///     .pinEdges()
     ///     .activate()
     /// ```
     ///
-    /// - Returns: A reference to the `Pin`
+    /// - Returns: A reference to the `Pinning` instance
     @discardableResult
     func activate() -> Self
 
@@ -193,7 +147,7 @@ public protocol Pinning: AnyObject {
 
     /// Remove the specified constraint
     ///
-    /// This method does not deactivate the constraint. It only frees it from `Pin` management
+    /// This method does not deactivate the constraint. It only frees it from `Pinning` management
     ///
     /// - Parameters:
     ///   - type: The constraint type
@@ -203,7 +157,7 @@ public protocol Pinning: AnyObject {
 
     /// Remove the specified constraint
     ///
-    /// This method does not deactivate the constraint. It only frees it from `Pin` management
+    /// This method does not deactivate the constraint. It only frees it from `Pinning` management
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
