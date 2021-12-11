@@ -428,12 +428,12 @@ class Test_Pin: XCTestCase {
     func testCustomConstraint() throws {
         let pin = sibling1
             .pin()
-            .using(
-                constraintIdentifier: "sibling1.width",
+            .addConstraint(
+                withIdentifier: "sibling1.width",
                 constraint: .width(forPinnableItem: sibling1)
             )
-            .using(
-                constraintIdentifier: "sibling1.height",
+            .addConstraint(
+                withIdentifier: "sibling1.height",
                 constraint: {
                     .height(forPinnableItem: sibling1)
                 }
@@ -548,11 +548,11 @@ class Test_Pin: XCTestCase {
             .activate()
 
         let leadingByType = pin.constraint(ofType: .leadingEdges)
-        let leadingByIdentifier = pin.constraint(withIdentifier: Pin.Constraint.leadingEdges.rawValue)
+        let leadingByIdentifier = pin.constraint(withIdentifier: DoublePin.Constraint.leadingEdges.rawValue)
         let heightByIdentifier = pin.constraint(withIdentifier: "sibling1.height")
 
-        XCTAssertEqual(leadingByType?.identifier, Pin.Constraint.leadingEdges.rawValue)
-        XCTAssertEqual(leadingByIdentifier?.identifier, Pin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(leadingByType?.identifier, DoublePin.Constraint.leadingEdges.rawValue)
+        XCTAssertEqual(leadingByIdentifier?.identifier, DoublePin.Constraint.leadingEdges.rawValue)
         XCTAssertEqual(heightByIdentifier?.identifier, "sibling1.height")
     }
 }
