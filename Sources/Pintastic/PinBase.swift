@@ -34,7 +34,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     /// - Parameters:
     ///   - identifier: An identifier for the constraint
     ///   - constraint: The constraint you wish to add
-    /// - Returns: A reference to the `Pinning` instance
+    /// - Returns: A reference to the receiver instance
     public func addConstraint(withIdentifier identifier: String, constraint: NSLayoutConstraint) -> Self {
         assert(constraints[identifier] == nil, "A constraint identifier \(identifier) already exists")
         constraint.identifier = identifier
@@ -53,7 +53,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     /// - Parameters:
     ///   - identifier: An identifier for the constraint
     ///   - builder: A closure that makes and returns a custom constraint
-    /// - Returns: A reference to the `Pinning` instance
+    /// - Returns: A reference to the receiver instance
     public func addConstraint(withIdentifier identifier: String, constraint: () -> NSLayoutConstraint) -> Self {
         addConstraint(withIdentifier: identifier, constraint: constraint())
     }
@@ -65,7 +65,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     /// - Parameters:
     ///   - type: The type of constraint
     ///   - handler: A closure that passes the constraint to the caller
-    /// - Returns: A reference to the `Pinning` instance
+    /// - Returns: A reference to the receiver instance
     public func constraint(
         ofType type: Constraint,
         handler: (NSLayoutConstraint?) -> Void
@@ -89,7 +89,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     /// - Parameters:
     ///   - identifier: The constraint identifier
     ///   - handler: A closure that passes the constraint to the caller
-    /// - Returns: A reference to the `Pinning` instance
+    /// - Returns: A reference to the receiver instance
     public func constraint(
         withIdentifier identifier: String,
         handler: (NSLayoutConstraint?) -> Void
@@ -120,7 +120,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
     ///     .activate()
     /// ```
     ///
-    /// - Returns: A reference to the `Pinning` instance
+    /// - Returns: A reference to the receiver instance
     @discardableResult
     public func activate() -> Self {
         NSLayoutConstraint.activate(constraints.values.map { $0 })
@@ -171,7 +171,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
 
     /// Remove the specified constraint
     ///
-    /// This method does not deactivate the constraint. It only frees it from `Pinning` management
+    /// This method does not deactivate the constraint. It only frees it from `PinBase` management
     ///
     /// - Parameters:
     ///   - type: The constraint type
@@ -183,7 +183,7 @@ public class PinBase<Constraint> where Constraint: RawRepresentable, Constraint.
 
     /// Remove the specified constraint
     ///
-    /// This method does not deactivate the constraint. It only frees it from `Pinning` management
+    /// This method does not deactivate the constraint. It only frees it from `PinBase` management
     ///
     /// - Parameters:
     ///   - identifier: The constraint identifier
