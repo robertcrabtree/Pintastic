@@ -42,7 +42,7 @@ public extension Pinnable {
     ///     .activate()
     /// ```
     func pin() -> Pin {
-        Pin(item: self, relationship: .discrete)
+        Pin(item: self, type: .discrete)
     }
 
     /// Use the `pin(to:)` method to apply constraints in relation to another item.
@@ -58,7 +58,7 @@ public extension Pinnable {
     /// - Parameter other: The other `Pinnable` item to create a relationship with
     /// - Returns: A reference to the `Pin`
     func pin(to other: Pinnable) -> Pin {
-        Pin(item: self, relationship: .relational(other))
+        Pin(item: self, type: .relational(other))
     }
 }
 

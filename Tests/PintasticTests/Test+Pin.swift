@@ -317,7 +317,7 @@ class Test_Pin: XCTestCase {
     func testLeadingToCenter() throws {
         let pin = sibling1
             .pin(to: parent)
-            .leadingToHorizontalCenter(constant: 20)
+            .leadingEdgeToHorizontalCenter(constant: 20)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .leadingToHorizontalCenter) else {
@@ -333,7 +333,7 @@ class Test_Pin: XCTestCase {
     func testTrailingToCenter() throws {
         let pin = sibling1
             .pin(to: parent)
-            .trailingToHorizontalCenter(constant: -20)
+            .trailingEdgeToHorizontalCenter(constant: -20)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .trailingToHorizontalCenter) else {
@@ -349,7 +349,7 @@ class Test_Pin: XCTestCase {
     func testTopToCenter() throws {
         let pin = sibling1
             .pin(to: parent)
-            .topToVerticalCenter(constant: 20)
+            .topEdgeToVerticalCenter(constant: 20)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .topToVerticalCenter) else {
@@ -365,7 +365,7 @@ class Test_Pin: XCTestCase {
     func testBottomToCenter() throws {
         let pin = sibling1
             .pin(to: parent)
-            .bottomToVerticalCenter(constant: -20)
+            .bottomEdgeToVerticalCenter(constant: -20)
             .activate()
 
         guard let constraint = pin.constraint(ofType: .bottomToVerticalCenter) else {

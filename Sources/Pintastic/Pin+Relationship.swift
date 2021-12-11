@@ -10,7 +10,7 @@ import Foundation
 public extension Pin {
 
     /// Describes whether or not the primary item has a relationship with anotherr
-    enum Relationship {
+    enum `Type` {
 
         /// The primary item does not have a relationship with any other items
         case discrete

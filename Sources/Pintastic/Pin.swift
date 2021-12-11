@@ -62,9 +62,9 @@ public class Pin {
     /// Initialize a `Pin` with the item(s) to apply constraints to
     /// - Parameter item: The `Pinnable` item you wish to apply constraints to
     /// - Parameter type: `.discreet` if the item will not be pinned to another item. `.relational` if the item will be pinned to another
-    public init(item: Pinnable, relationship: Relationship) {
+    public init(item: Pinnable, type: Type) {
         self.primaryItem = item
-        self.relationship = relationship
+        self.type = type
     }
 
     /// Pin the edges of the primary item to the secondary item
@@ -252,7 +252,7 @@ public class Pin {
     /// Pin the leading edge of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func leadingToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+    public func leadingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
         addRelationalConstraint(.leadingToHorizontalCenter) { other in
             primaryItem.leadingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
@@ -261,7 +261,7 @@ public class Pin {
     /// Pin the trailing edge of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func trailingToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
+    public func trailingEdgeToHorizontalCenter(constant: CGFloat = 0.0) -> Pin {
         addRelationalConstraint(.trailingToHorizontalCenter) { other in
             primaryItem.trailingAnchor.constraint(equalTo: other.centerXAnchor, constant: constant)
         }
@@ -270,7 +270,7 @@ public class Pin {
     /// Pin the top of the primary item to the center of the secondary item
     /// - Parameter constant: A positive value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func topToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+    public func topEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
         addRelationalConstraint(.topToVerticalCenter) { other in
             primaryItem.topAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
@@ -279,7 +279,7 @@ public class Pin {
     /// Pin the bottom of the primary item to the center of the secondary item
     /// - Parameter constant: A negative value will create space between the item and the secondary item
     /// - Returns: A reference to the `Pin`
-    public func bottomToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
+    public func bottomEdgeToVerticalCenter(constant: CGFloat = 0.0) -> Pin {
         addRelationalConstraint(.bottomToVerticalCenter) { other in
             primaryItem.bottomAnchor.constraint(equalTo: other.centerYAnchor, constant: constant)
         }
@@ -455,7 +455,7 @@ public class Pin {
     // MARK: Private vars and constants
 
     private let primaryItem: Pinnable
-    private var relationship: Relationship
+    private var type: Type
 
     private var constraints: [String: NSLayoutConstraint] = [:]
 
@@ -477,9 +477,9 @@ public class Pin {
         _ key: Constraint,
         block: (Pinnable) -> NSLayoutConstraint
     ) -> Pin {
-        switch relationship {
+        switch type {
         case .discrete:
-            assert(false, "The relationship should be .attached for relational constraints")
+            assert(false, "The type should be .relational")
             return self
         case .relational(let secondaryItem):
             return addConstraint(key, constraint: block(secondaryItem))
