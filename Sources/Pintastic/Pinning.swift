@@ -26,7 +26,7 @@ import UIKit
 ///
 /// ```
 /// view
-///     .makePin()
+///     .pin()
 ///     .width(constant: 100.0)
 ///     .height(constant: 100.0)
 ///     .activate()
@@ -47,7 +47,7 @@ import UIKit
 ///
 /// ```
 /// childView
-///     .makePin(to: containerView)
+///     .pin(to: containerView)
 ///     .leadingEdges()
 ///     .trailingEdges()
 ///     .topEdges()
@@ -139,7 +139,7 @@ public protocol Pinning: AnyObject {
     ///
     /// ```
     /// view
-    ///     .makePin(to: containerView)
+    ///     .pin(to: containerView)
     ///     .edges()
     ///     .activate()
     /// ```

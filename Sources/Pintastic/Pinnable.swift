@@ -32,16 +32,16 @@ public protocol Pinnable {
 
 public extension Pinnable {
 
-    /// Use the `makePin()` method to apply constraints that aren't in relationship with another item.
+    /// Use the `pin()` method to apply constraints that aren't in relationship with another item.
     ///
     /// ```
     /// view
-    ///     .makePin()
+    ///     .pin()
     ///     .width(constant: 100)
     ///     .height(constant: 100)
     ///     .activate()
     /// ```
-    func makePin() -> SinglePin {
+    func pin() -> SinglePin {
         SinglePin(item: self)
     }
 
@@ -50,7 +50,7 @@ public extension Pinnable {
     /// The following example pins the edges of the root item to the other item
     /// ```
     /// view
-    ///     .makePin(to: containerView)
+    ///     .pin(to: containerView)
     ///     .pinEdges()
     ///     .activate()
     /// ```

@@ -220,7 +220,7 @@ class Test_Pin: XCTestCase {
 
     func testWidth() throws {
         let pin = sibling1
-            .makePin()
+            .pin()
             .pinWidth(constant: 100)
             .activate()
 
@@ -234,7 +234,7 @@ class Test_Pin: XCTestCase {
 
     func testHeight() throws {
         let pin = sibling1
-            .makePin()
+            .pin()
             .pinHeight(constant: 100)
             .activate()
 
@@ -248,7 +248,7 @@ class Test_Pin: XCTestCase {
 
     func testSameWidthAndHeight() throws {
         let pin = sibling1
-            .makePin()
+            .pin()
             .pinHeight(constant: 100)
             .pinWidthEqualToHeight(multiplier: 0.5)
             .activate()
@@ -265,7 +265,7 @@ class Test_Pin: XCTestCase {
 
     func testSameHeightAndWidth() throws {
         let pin = sibling1
-            .makePin()
+            .pin()
             .pinWidth(constant: 100)
             .pinHeightEqualToWidth(multiplier: 0.5)
             .activate()
@@ -427,7 +427,7 @@ class Test_Pin: XCTestCase {
 
     func testCustomConstraint() throws {
         let pin = sibling1
-            .makePin()
+            .pin()
             .addConstraint(
                 withIdentifier: "sibling1.width",
                 constraint: .width(forPinnableItem: sibling1)
