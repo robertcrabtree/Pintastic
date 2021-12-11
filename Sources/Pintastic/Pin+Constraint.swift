@@ -7,7 +7,27 @@
 
 import Foundation
 
-public extension Pin {
+public extension SinglePin {
+
+    /// Represents a constraint that can be applied to one or more `Pinnable` items
+    enum Constraint: String {
+
+        /// Discrete constraint with a specified width
+        case width = "pin.discrete.width"
+
+        /// Discrete constraint with a specified height
+        case height = "pin.discrete.height"
+
+        /// Discrete constraint with equal width and height
+        case widthToHeight = "pin.discrete.width.height"
+
+        /// Discrete constraint with equal height and width
+        case heightToWidth = "pin.discrete.height.width"
+    }
+}
+
+
+public extension DoublePin {
 
     /// Represents a constraint that can be applied to one or more `Pinnable` items
     enum Constraint: String {
@@ -41,18 +61,6 @@ public extension Pin {
 
         /// Relational constraint with vertical centers pinned
         case verticalCenters = "pin.relational.vcenter.vcenter"
-
-        /// Discrete constraint with a specified width
-        case width = "pin.discrete.width"
-
-        /// Discrete constraint with a specified height
-        case height = "pin.discrete.height"
-
-        /// Discrete constraint with equal width and height
-        case widthToHeight = "pin.discrete.width.height"
-
-        /// Discrete constraint with equal height and width
-        case heightToWidth = "pin.discrete.height.width"
 
         /// Relational constraint with equal widths
         case widths = "pin.relational.width.width"

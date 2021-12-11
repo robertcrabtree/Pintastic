@@ -463,7 +463,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -476,7 +476,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -496,7 +496,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -510,7 +510,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -525,7 +525,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
@@ -542,7 +542,7 @@ class Test_Pin: XCTestCase {
         let pin = sibling1
             .pin(to: parent.safeAreaLayoutGuide)
             .leadingEdges()
-            .using(constraintIdentifier: "sibling1.height", constraint: {
+            .addConstraint(withIdentifier: "sibling1.height", constraint: {
                 .height(forPinnableItem: sibling1)
             })
             .activate()
