@@ -81,8 +81,8 @@ Here's how you would do some basic sizing.
 ```Swift
 subview
     .pin()
-    .pinWidth(constant: 100.0) // constant width
-    .pinHeight(constant: 100.0) // constant height
+    .pin(width: 100.0) // constant width
+    .pin(height: 100.0) // constant height
     .activate()
 
 subview
