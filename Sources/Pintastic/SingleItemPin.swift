@@ -29,22 +29,22 @@ public final class SingleItemPin: PinBase<SingleItemPinConstraint> {
     }
 
     /// Constrain the width of the primary item to the the specified constant
-    /// - Parameter constant: The desired width
+    /// - Parameter width: The desired width
     /// - Returns: A reference to the `SingleItemPin`
-    public func pinWidth(constant: CGFloat) -> SingleItemPin {
+    public func pin(width: CGFloat) -> SingleItemPin {
         addConstraint(
             .width,
-            constraint: item.widthAnchor.constraint(equalToConstant: constant)
+            constraint: item.widthAnchor.constraint(equalToConstant: width)
         )
     }
 
     /// Constrain the height of the primary item to the the specified constant
-    /// - Parameter constant: The desired height
+    /// - Parameter height: The desired height
     /// - Returns: A reference to the `SingleItemPin`
-    public func pinHeight(constant: CGFloat) -> SingleItemPin {
+    public func pin(height: CGFloat) -> SingleItemPin {
         addConstraint(
             .height,
-            constraint: item.heightAnchor.constraint(equalToConstant: constant)
+            constraint: item.heightAnchor.constraint(equalToConstant: height)
         )
     }
 
@@ -54,7 +54,7 @@ public final class SingleItemPin: PinBase<SingleItemPinConstraint> {
     ///   - height: The item height
     /// - Returns: A reference to the `SingleItemPin`
     public func pin(width: CGFloat, height: CGFloat) -> SingleItemPin {
-        pinWidth(constant: width).pinHeight(constant: height)
+        pin(width: width).pin(height: height)
     }
 
     /// Constrain the primary item size to the specified value
@@ -101,7 +101,7 @@ public extension Pinnable {
     /// view
     ///     .makePin()
     ///     .pinWidth(constant: 100)
-    ///     .pinHeight(constant: 100)
+    ///     .pin(constant: 100)
     ///     .activate()
     /// ```
     ///
@@ -111,19 +111,19 @@ public extension Pinnable {
     }
 
     /// Constrain the width of the receiver to the the specified constant
-    /// - Parameter constant: The desired width
+    /// - Parameter width: The desired width
     /// - Returns: A reference to the `SingleItemPin`
-    func pinWidth(constant: CGFloat) -> SingleItemPin {
+    func pin(width: CGFloat) -> SingleItemPin {
         SingleItemPin(item: self)
-            .pinWidth(constant: constant)
+            .pin(width: width)
     }
 
     /// Constrain the height of the receiver to the the specified constant
-    /// - Parameter constant: The desired height
+    /// - Parameter height: The desired height
     /// - Returns: A reference to the `SingleItemPin`
-    func pinHeight(constant: CGFloat) -> SingleItemPin {
+    func pin(height: CGFloat) -> SingleItemPin {
         SingleItemPin(item: self)
-            .pinHeight(constant: constant)
+            .pin(height: height)
     }
 
     /// Constrain the receiver width and height to the specified values
