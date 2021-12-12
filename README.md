@@ -63,12 +63,12 @@ Here's how you would constrain the edges of a view.
 
 ```Swift
 subview
-    .pin(to: container)
+    .makePin(to: container)
     .pinEdges()
     .activate()
 
 subview
-    .pin(to: container)
+    .makePin(to: container)
     .pinLeadingEdges(constant: 10)
     .pinTrailingEdges(constant: -10)
     .activate()
@@ -80,13 +80,13 @@ Here's how you would do some basic sizing.
 
 ```Swift
 subview
-    .pin()
+    .makePin()
     .pin(width: 100.0) // constant width
     .pin(height: 100.0) // constant height
     .activate()
 
 subview
-    .pin(to: container)
+    .makePin(to: container)
     .pinWidths(multiplier: 0.5) // width relative to another
     .pinHeights(multiplier: 0.5) // height relative to another
     .activate()
@@ -98,12 +98,12 @@ Here's how you would position a view relative to another.
 
 ```Swift
 leftView
-    .pin(to: centerView)
+    .makePin(to: centerView)
     .pinBefore(constant: -20)
     .activate()
 
 topView
-    .pin(to: centerView)
+    .makePin(to: centerView)
     .pinAbove(constant: -20)
     .activate()
 ```
@@ -114,12 +114,12 @@ Here's how views are centered.
 
 ```Swift
 centerView
-    .pin(to: container)
+    .makePin(to: container)
     .pinCenters()
     .activate()
 
 centerView
-    .pin(to: container)
+    .makePin(to: container)
     .pinHorizontalCenters()
     .pinVerticalCenters()
     .activate()
@@ -132,7 +132,7 @@ If you need a finer granularity of control you can add custom constraints.
 ```Swift
 let constraintID = "left.width.equal.to.right.height"
 leftView
-    .pin(to: rightView)
+    .makePin(to: rightView)
     .addConstraint(withIdentifier: constraintID) {
         leftView.widthAnchor.constraint(equalTo: rightView.heightAnchor)
     }
@@ -148,7 +148,7 @@ Sometimes you need to alter constraint values beyond the time of initialization.
 
 ```Swift
 let pin = subview
-    .pin()
+    .makePin()
     .pinWidth(constant: 100)
     .pinHeight(constant: 100)
     .activate()
