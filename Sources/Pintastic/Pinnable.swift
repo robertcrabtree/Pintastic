@@ -39,42 +39,6 @@ public protocol Pinnable {
     var heightAnchor: NSLayoutDimension { get }
 }
 
-// MARK: - Convenient extensions
-
-public extension Pinnable {
-
-    /// Use the `makePin()` method to apply trivial constraints to an item such as width and height constraints.
-    ///
-    /// ```
-    /// view
-    ///     .makePin()
-    ///     .pinWidth(constant: 100)
-    ///     .pinHeight(constant: 100)
-    ///     .activate()
-    /// ```
-    ///
-    /// - Returns: A reference to the `SingleItemPin`
-    func makePin() -> SingleItemPin {
-        SingleItemPin(item: self)
-    }
-
-    /// Use the `makePin(to:)` method to apply constraints in relation to another item.
-    ///
-    /// The following example pins the edges of the receiver to another item
-    /// ```
-    /// view
-    ///     .makePin(to: containerView)
-    ///     .pinEdges()
-    ///     .activate()
-    /// ```
-    ///
-    /// - Parameter other: The other `Pinnable` item to create a relationship with
-    /// - Returns: A reference to the `MultiItemPin`
-    func makePin(to other: Pinnable) -> MultiItemPin {
-        MultiItemPin(primaryItem: self, secondaryItem: other)
-    }
-}
-
 // MARK: - Conforming types - you're welcome
 
 extension UIView: Pinnable {}

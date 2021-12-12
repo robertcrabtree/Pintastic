@@ -273,3 +273,22 @@ public final class MultiItemPin: PinBase<MultiItemPinConstraint> {
     private let primaryItem: Pinnable
     private let secondaryItem: Pinnable
 }
+
+public extension Pinnable {
+
+    /// Use the `makePin(to:)` method to apply constraints in relation to another item.
+    ///
+    /// The following example pins the edges of the receiver to the edges of another item
+    /// ```
+    /// view
+    ///     .makePin(to: containerView)
+    ///     .pinEdges()
+    ///     .activate()
+    /// ```
+    ///
+    /// - Parameter other: The other `Pinnable` item to create a relationship with
+    /// - Returns: A reference to the `MultiItemPin`
+    func makePin(to other: Pinnable) -> MultiItemPin {
+        MultiItemPin(primaryItem: self, secondaryItem: other)
+    }
+}

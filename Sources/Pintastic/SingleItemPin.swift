@@ -92,3 +92,71 @@ public final class SingleItemPin: PinBase<SingleItemPinConstraint> {
 
     private let item: Pinnable
 }
+
+public extension Pinnable {
+
+    /// Use the `makePin()` method to apply trivial constraints to an item such as width and height constraints.
+    ///
+    /// ```
+    /// view
+    ///     .makePin()
+    ///     .pinWidth(constant: 100)
+    ///     .pinHeight(constant: 100)
+    ///     .activate()
+    /// ```
+    ///
+    /// - Returns: A reference to the `SingleItemPin`
+    func makePin() -> SingleItemPin {
+        SingleItemPin(item: self)
+    }
+
+    /// Constrain the width of the receiver to the the specified constant
+    /// - Parameter constant: The desired width
+    /// - Returns: A reference to the `SingleItemPin`
+    func pinWidth(constant: CGFloat) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pinWidth(constant: constant)
+    }
+
+    /// Constrain the height of the receiver to the the specified constant
+    /// - Parameter constant: The desired height
+    /// - Returns: A reference to the `SingleItemPin`
+    func pinHeight(constant: CGFloat) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pinHeight(constant: constant)
+    }
+
+    /// Constrain the receiver width and height to the specified values
+    /// - Parameters:
+    ///   - width: The item width
+    ///   - height: The item height
+    /// - Returns: A reference to the `SingleItemPin`
+    func pin(width: CGFloat, height: CGFloat) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pin(width: width, height: height)
+    }
+
+    /// Constrain the receiver size to the specified value
+    /// - Parameter size: The item size
+    /// - Returns: A reference to the `SingleItemPin`
+    func pin(size: CGSize) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pin(size: size)
+    }
+
+    /// Constrain the receiver width to the receiver height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `SingleItemPin`
+    func pinWidthEqualToHeight(multiplier: CGFloat = 1.0) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pinWidthEqualToHeight(multiplier: multiplier)
+    }
+
+    /// Constrain the receiver width to the receiver height
+    /// - Parameter multiplier: The multiplier
+    /// - Returns: A reference to the `SingleItemPin`
+    func pinHeightEqualToWidth(multiplier: CGFloat = 1.0) -> SingleItemPin {
+        SingleItemPin(item: self)
+            .pinHeightEqualToWidth(multiplier: multiplier)
+    }
+}
